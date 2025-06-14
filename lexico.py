@@ -84,6 +84,22 @@ tokens = [
 # LISTA DE TOKENS
 # -----------------------------
 
+# STEVEN LINO - INICIO
+
+t_LOGICAL_AND     = r'&&'
+t_LOGICAL_OR      = r'\|\|'
+t_LOGICAL_NOT     = r'!'
+
+t_ASSIGN          = r'='
+t_PLUS_ASSIGN     = r'\+='
+t_MINUS_ASSIGN    = r'-='
+t_TIMES_ASSIGN    = r'\*='
+t_DIVIDE_ASSIGN   = r'/='
+t_OR_ASSIGN       = r'\|\|='
+t_AND_ASSIGN      = r'&&='
+
+# STEVEN LINO - FIN
+
 # SILVIA SAQUISILI - INICIO
 
 t_MATCH_REGEX     = r'=~'
@@ -102,6 +118,31 @@ t_COMMA           = r','
 t_SEMICOLON       = r';'
 
 # SILVIA SAQUISILI - FIN
+
+# STEVEN LINO - INICIO
+# Cadenas
+def t_STRING(t):
+    r'"([^\\"]|\\.)*"'
+    t.value = t.value[1:-1]  # quitar comillas
+    return t
+
+# Flotantes
+def t_FLOAT(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
+# Enteros
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+def t_GLOBAL_VAR(t):
+    r'\$[a-zA-Z_]\w*'
+    return t
+
+# STEVEN LINO - FIN
 
 # -----------------------------
 
