@@ -212,3 +212,29 @@ def t_error(t):
     t.lexer.skip(1)
 
 # SILVIA SAQUISILI - FIN
+
+# ANGEL GÓMEZ - INICIO
+
+# CONSTRUCCIÓN DEL LÉXICO
+
+lexer = lex.lex()
+
+if __name__ == "_main_":
+    code = '''
+    class Persona
+      def initialize(nombre)
+        @nombre = nombre
+      end
+
+      def saludar
+        puts "Hola #{@nombre}"
+      end
+    end
+
+    persona = Persona.new("Ana")
+    persona.saludar
+    '''
+
+    lexer.input(code)
+    for token in lexer:
+        print(token)
