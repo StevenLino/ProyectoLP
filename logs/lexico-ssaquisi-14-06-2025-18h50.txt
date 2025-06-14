@@ -1,0 +1,67 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 18:50
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: DEF, Valor: def
+[Línea 2] Tipo: IDENTIFIER, Valor: multiplicar
+[Línea 2] Tipo: LPAREN, Valor: (
+[Línea 2] Tipo: IDENTIFIER, Valor: a
+[Línea 2] Tipo: COMMA, Valor: ,
+[Línea 2] Tipo: IDENTIFIER, Valor: b
+[Línea 2] Tipo: RPAREN, Valor: )
+[Línea 3] Tipo: IF, Valor: if
+[Línea 3] Tipo: IDENTIFIER, Valor: defined
+[Línea 3] Tipo: LPAREN, Valor: (
+[Línea 3] Tipo: IDENTIFIER, Valor: a
+[Línea 3] Tipo: RPAREN, Valor: )
+[Línea 3] Tipo: AND, Valor: and
+[Línea 3] Tipo: IDENTIFIER, Valor: defined
+[Línea 3] Tipo: LPAREN, Valor: (
+[Línea 3] Tipo: IDENTIFIER, Valor: b
+[Línea 3] Tipo: RPAREN, Valor: )
+[Línea 4] Tipo: RETURN, Valor: return
+[Línea 4] Tipo: IDENTIFIER, Valor: a
+[Línea 4] Tipo: TIMES, Valor: *
+[Línea 4] Tipo: IDENTIFIER, Valor: b
+[Línea 5] Tipo: IDENTIFIER, Valor: els
+[Línea 6] Tipo: IDENTIFIER, Valor: puts
+[Línea 6] Tipo: STRING, Valor: Parámetros faltantes
+[Línea 7] Tipo: END, Valor: end
+[Línea 8] Tipo: END, Valor: end
+[Línea 10] Tipo: FOR, Valor: for
+[Línea 10] Tipo: IDENTIFIER, Valor: i
+[Línea 10] Tipo: IN, Valor: in
+[Línea 10] Tipo: INTEGER, Valor: 0
+[Línea 10] Tipo: RANGE_INCLUSIVE, Valor: ..
+[Línea 10] Tipo: INTEGER, Valor: 2
+[Línea 11] Tipo: IDENTIFIER, Valor: puts
+[Línea 11] Tipo: STRING, Valor: Iteración #{i}
+[Línea 12] Tipo: END, Valor: end
+[Línea 14] Tipo: BEGIN, Valor: begin
+[Línea 15] Tipo: IDENTIFIER, Valor: resultado
+[Línea 15] Tipo: ASSIGN, Valor: =
+[Línea 15] Tipo: IDENTIFIER, Valor: multiplicar
+[Línea 15] Tipo: LPAREN, Valor: (
+[Línea 15] Tipo: INTEGER, Valor: 2
+[Línea 15] Tipo: COMMA, Valor: ,
+[Línea 15] Tipo: NIL, Valor: nil
+[Línea 15] Tipo: RPAREN, Valor: )
+[Línea 16] Tipo: RESCUE, Valor: rescue
+[Línea 16] Tipo: ASSIGN, Valor: =
+[Línea 16] Tipo: GREATER_THAN, Valor: >
+[Línea 16] Tipo: IDENTIFIER, Valor: e
+[Línea 17] Tipo: IDENTIFIER, Valor: puts
+[Línea 17] Tipo: STRING, Valor: Error: #{e}
+[Línea 18] Tipo: ENSURE, Valor: ensure
+[Línea 19] Tipo: IDENTIFIER, Valor: puts
+[Línea 19] Tipo: STRING, Valor: Proceso completado
+[Línea 20] Tipo: END, Valor: end
+
+Total de tokens: 54
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: '?' en la línea 3
+[Error Léxico] Carácter ilegal: '?' en la línea 3
+
+Total de errores: 2

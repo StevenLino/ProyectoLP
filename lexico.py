@@ -156,7 +156,7 @@ def t_FLOAT(t):
     return t
 
 # ENTEROS
-def t_NUMBER(t):
+def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
     return t
@@ -230,39 +230,24 @@ lexer = lex.lex()
 
 if __name__ == "__main__":
     code = '''
-    BEGIN { puts "Inicio del script" }
-    END { puts "Fin del script" }
-
-    class Animal
-        def initialize(nombre)
-            @nombre = nombre
-        end
-
-        def hablar
-            if @nombre == "Perro"
-                puts "Guau"
-            elsif @nombre == "Gato"
-                puts "Miau"
-            else
-                puts "Desconocido"
-            end
+    def multiplicar(a, b)
+        if defined?(a) and defined?(b)
+            return a * b
+        els
+            puts "Parámetros faltantes"
         end
     end
 
-    animales = [Animal.new("Perro"), Animal.new("Gato")]
-
-    for animal in animales
-        animal.hablar
+    for i in 0..2
+        puts "Iteración #{i}"
     end
 
-    def saludar
-        yield if block_given?
-    end
-
-    saludar { puts "¡Hola desde el bloque!" }
-
-    unless animales.empty?
-        puts "Hay animales en la lista"
+    begin
+        resultado = multiplicar(2, nil)
+    rescue => e
+        puts "Error: #{e}"
+    ensure
+        puts "Proceso completado"
     end
     '''
 
