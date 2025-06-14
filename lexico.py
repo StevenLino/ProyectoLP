@@ -1,4 +1,7 @@
 import ply.lex as lex
+import os
+from datetime import datetime
+import subprocess
 
 # SILVIA SAQUISILI - INICIO
 
@@ -81,10 +84,8 @@ tokens = [
 
 # SILVIA SAQUISILI - FIN
 
-# LISTA DE TOKENS
-# -----------------------------
-
 # EXPRESIONES REGULARES
+# -----------------------------
 
 # ANGEL GÓMEZ - INICIO
 
@@ -139,20 +140,22 @@ t_SEMICOLON       = r';'
 
 # SILVIA SAQUISILI - FIN
 
+# -----------------------------
+
 # STEVEN LINO - INICIO
-# Cadenas
+# CADENAS
 def t_STRING(t):
     r'"([^\\"]|\\.)*"'
     t.value = t.value[1:-1]  # quitar comillas
     return t
 
-# Flotantes
+# FLOTANTES
 def t_FLOAT(t):
     r'\d+\.\d+'
     t.value = float(t.value)
     return t
 
-# Enteros
+# ENTEROS
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
@@ -207,8 +210,13 @@ t_ignore = ' \t'
 t_DOT = r'\.'
 
 # ERRORES
+
+errores_lexicos = []
+
 def t_error(t):
-    print(f"[Error Léxico] Carácter ilegal: {t.value[0]!r} en la línea {t.lineno}")
+    mensaje = f"[Error Léxico] Carácter ilegal: {t.value[0]!r} en la línea {t.lineno}"
+    print(mensaje)
+    errores_lexicos.append(mensaje)
     t.lexer.skip(1)
 
 # SILVIA SAQUISILI - FIN
@@ -216,25 +224,92 @@ def t_error(t):
 # ANGEL GÓMEZ - INICIO
 
 # CONSTRUCCIÓN DEL LÉXICO
+# -----------------------------
 
 lexer = lex.lex()
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     code = '''
-    class Persona
-      def initialize(nombre)
-        @nombre = nombre
-      end
+    BEGIN { puts "Inicio del script" }
+    END { puts "Fin del script" }
 
-      def saludar
-        puts "Hola #{@nombre}"
-      end
+    class Animal
+        def initialize(nombre)
+            @nombre = nombre
+        end
+
+        def hablar
+            if @nombre == "Perro"
+                puts "Guau"
+            elsif @nombre == "Gato"
+                puts "Miau"
+            else
+                puts "Desconocido"
+            end
+        end
     end
 
-    persona = Persona.new("Ana")
-    persona.saludar
+    animales = [Animal.new("Perro"), Animal.new("Gato")]
+
+    for animal in animales
+        animal.hablar
+    end
+
+    def saludar
+        yield if block_given?
+    end
+
+    saludar { puts "¡Hola desde el bloque!" }
+
+    unless animales.empty?
+        puts "Hay animales en la lista"
+    end
     '''
 
+    # MECÁNICA DE LOS LOGS
+
+    # OBTENCIÓN DEL USUARIO GIT
+    try:
+        usuario_git = subprocess.getoutput("git config user.name").strip()
+        if not usuario_git:
+            usuario_git = "usuarioGit"
+    except:
+        usuario_git = "usuarioGit"
+
+    # CREACIÓN DE LA CARPETA DE LOS LOGS
+    if not os.path.exists("logs"):
+        os.makedirs("logs")
+
+    # OBTENCIÓN DE LA FECHA Y NOMBRE DEL ARCHIVO
+    ahora = datetime.now()
+    nombre_archivo = f"lexico-{usuario_git}-{ahora.strftime('%d-%m-%Y-%Hh%M')}.txt"
+    ruta_archivo = os.path.join("logs", nombre_archivo)
+
     lexer.input(code)
-    for token in lexer:
-        print(token)
+
+    # MODIFICACIÓN DEL ARCHIVO PARA ESCRIBIR EL LOG
+    with open(ruta_archivo, 'w', encoding='utf-8') as f:
+        f.write("=== LOG ANALIZADOR LÉXICO ===\n")
+        f.write(f"Fecha: {ahora.strftime('%d/%m/%Y')}\n")
+        f.write(f"Hora: {ahora.strftime('%H:%M')}\n\n")
+
+        f.write("--- TOKENS RECONOCIDOS ---\n")
+        token_count = 0
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            token_count += 1
+            f.write(f"[Línea {tok.lineno}] Tipo: {tok.type}, Valor: {tok.value}\n")
+
+        f.write(f"\nTotal de tokens: {token_count}\n")
+
+        f.write("\n--- ERRORES ---\n")
+        if not errores_lexicos:
+            f.write("No se encontraron errores léxicos.\n")
+        else:
+            for error in errores_lexicos:
+                f.write(error + "\n")
+        f.write(f"\nTotal de errores: {len(errores_lexicos)}\n")
+
+    print(f"\nLog guardado en: {ruta_archivo}")

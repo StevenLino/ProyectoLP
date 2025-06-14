@@ -1,0 +1,97 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 18:36
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: CONSTANT, Valor: BEGIN
+[Línea 2] Tipo: LBRACE, Valor: {
+[Línea 2] Tipo: IDENTIFIER, Valor: puts
+[Línea 2] Tipo: STRING, Valor: Inicio del script
+[Línea 2] Tipo: RBRACE, Valor: }
+[Línea 3] Tipo: CONSTANT, Valor: END
+[Línea 3] Tipo: LBRACE, Valor: {
+[Línea 3] Tipo: IDENTIFIER, Valor: puts
+[Línea 3] Tipo: STRING, Valor: Fin del script
+[Línea 3] Tipo: RBRACE, Valor: }
+[Línea 5] Tipo: CLASS, Valor: class
+[Línea 5] Tipo: CONSTANT, Valor: Animal
+[Línea 6] Tipo: DEF, Valor: def
+[Línea 6] Tipo: IDENTIFIER, Valor: initialize
+[Línea 6] Tipo: LPAREN, Valor: (
+[Línea 6] Tipo: IDENTIFIER, Valor: nombre
+[Línea 6] Tipo: RPAREN, Valor: )
+[Línea 7] Tipo: INSTANCE_VAR, Valor: @nombre
+[Línea 7] Tipo: ASSIGN, Valor: =
+[Línea 7] Tipo: IDENTIFIER, Valor: nombre
+[Línea 8] Tipo: END, Valor: end
+[Línea 10] Tipo: DEF, Valor: def
+[Línea 10] Tipo: IDENTIFIER, Valor: hablar
+[Línea 11] Tipo: IF, Valor: if
+[Línea 11] Tipo: INSTANCE_VAR, Valor: @nombre
+[Línea 11] Tipo: EQUAL_EQUAL, Valor: ==
+[Línea 11] Tipo: STRING, Valor: Perro
+[Línea 12] Tipo: IDENTIFIER, Valor: puts
+[Línea 12] Tipo: STRING, Valor: Guau
+[Línea 13] Tipo: ELSIF, Valor: elsif
+[Línea 13] Tipo: INSTANCE_VAR, Valor: @nombre
+[Línea 13] Tipo: EQUAL_EQUAL, Valor: ==
+[Línea 13] Tipo: STRING, Valor: Gato
+[Línea 14] Tipo: IDENTIFIER, Valor: puts
+[Línea 14] Tipo: STRING, Valor: Miau
+[Línea 15] Tipo: ELSE, Valor: else
+[Línea 16] Tipo: IDENTIFIER, Valor: puts
+[Línea 16] Tipo: STRING, Valor: Desconocido
+[Línea 17] Tipo: END, Valor: end
+[Línea 18] Tipo: END, Valor: end
+[Línea 19] Tipo: END, Valor: end
+[Línea 21] Tipo: IDENTIFIER, Valor: animales
+[Línea 21] Tipo: ASSIGN, Valor: =
+[Línea 21] Tipo: LBRACKET, Valor: [
+[Línea 21] Tipo: CONSTANT, Valor: Animal
+[Línea 21] Tipo: DOT, Valor: .
+[Línea 21] Tipo: IDENTIFIER, Valor: new
+[Línea 21] Tipo: LPAREN, Valor: (
+[Línea 21] Tipo: STRING, Valor: Perro
+[Línea 21] Tipo: RPAREN, Valor: )
+[Línea 21] Tipo: COMMA, Valor: ,
+[Línea 21] Tipo: CONSTANT, Valor: Animal
+[Línea 21] Tipo: DOT, Valor: .
+[Línea 21] Tipo: IDENTIFIER, Valor: new
+[Línea 21] Tipo: LPAREN, Valor: (
+[Línea 21] Tipo: STRING, Valor: Gato
+[Línea 21] Tipo: RPAREN, Valor: )
+[Línea 21] Tipo: RBRACKET, Valor: ]
+[Línea 23] Tipo: FOR, Valor: for
+[Línea 23] Tipo: IDENTIFIER, Valor: animal
+[Línea 23] Tipo: IN, Valor: in
+[Línea 23] Tipo: IDENTIFIER, Valor: animales
+[Línea 24] Tipo: IDENTIFIER, Valor: animal
+[Línea 24] Tipo: DOT, Valor: .
+[Línea 24] Tipo: IDENTIFIER, Valor: hablar
+[Línea 25] Tipo: END, Valor: end
+[Línea 27] Tipo: DEF, Valor: def
+[Línea 27] Tipo: IDENTIFIER, Valor: saludar
+[Línea 28] Tipo: YIELD, Valor: yield
+[Línea 28] Tipo: IF, Valor: if
+[Línea 28] Tipo: IDENTIFIER, Valor: block_given
+[Línea 29] Tipo: END, Valor: end
+[Línea 31] Tipo: IDENTIFIER, Valor: saludar
+[Línea 31] Tipo: LBRACE, Valor: {
+[Línea 31] Tipo: IDENTIFIER, Valor: puts
+[Línea 31] Tipo: STRING, Valor: ¡Hola desde el bloque!
+[Línea 31] Tipo: RBRACE, Valor: }
+[Línea 33] Tipo: UNLESS, Valor: unless
+[Línea 33] Tipo: IDENTIFIER, Valor: animales
+[Línea 33] Tipo: DOT, Valor: .
+[Línea 33] Tipo: IDENTIFIER, Valor: empty
+[Línea 34] Tipo: IDENTIFIER, Valor: puts
+[Línea 34] Tipo: STRING, Valor: Hay animales en la lista
+[Línea 35] Tipo: END, Valor: end
+
+Total de tokens: 84
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: '?' en la línea 28
+[Error Léxico] Carácter ilegal: '?' en la línea 33
+
+Total de errores: 2
