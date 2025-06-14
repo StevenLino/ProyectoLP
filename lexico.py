@@ -84,6 +84,26 @@ tokens = [
 # LISTA DE TOKENS
 # -----------------------------
 
+# EXPRESIONES REGULARES
+
+# ANGEL GÓMEZ - INICIO
+
+t_POWER           = r'\*\*'
+t_PLUS            = r'\+'
+t_MINUS           = r'-'
+t_TIMES           = r'\*'
+t_DIVIDE          = r'/'
+t_MODULO          = r'%'
+
+t_GREATER_EQUAL   = r'>='
+t_LESS_EQUAL      = r'<='
+t_EQUAL_EQUAL     = r'=='
+t_NOT_EQUAL       = r'!='
+t_GREATER_THAN    = r'>'
+t_LESS_THAN       = r'<'
+
+# ANGEL GÓMEZ - FIN
+
 # STEVEN LINO - INICIO
 
 t_LOGICAL_AND     = r'&&'
@@ -144,7 +164,26 @@ def t_GLOBAL_VAR(t):
 
 # STEVEN LINO - FIN
 
-# -----------------------------
+# ANGEL GÓMEZ - INICIO
+
+def t_INSTANCE_VAR(t):
+    r'@[a-zA-Z_]\w*'
+    return t
+
+def t_CLASS_VAR(t):
+    r'@@[a-zA-Z_]\w*'
+    return t
+
+def t_CONSTANT(t):
+    r'[A-Z][a-zA-Z_0-9]*'
+    return t
+
+def t_IDENTIFIER(t):
+    r'[a-z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value, 'IDENTIFIER')
+    return t
+
+# ANGEL GÓMEZ - FIN
 
 # SILVIA SAQUISILI - INICIO
 
