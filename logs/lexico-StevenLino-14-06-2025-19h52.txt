@@ -1,0 +1,81 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:52
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: CLASS, Valor: class
+[Línea 2] Tipo: CONSTANT, Valor: Tarea
+[Línea 3] Tipo: IDENTIFIER, Valor: attr_accessor
+[Línea 3] Tipo: IDENTIFIER, Valor: titulo
+[Línea 3] Tipo: COMMA, Valor: ,
+[Línea 3] Tipo: IDENTIFIER, Valor: completada
+[Línea 4] Tipo: DEF, Valor: def
+[Línea 4] Tipo: IDENTIFIER, Valor: initialize
+[Línea 4] Tipo: LPAREN, Valor: (
+[Línea 4] Tipo: IDENTIFIER, Valor: titulo
+[Línea 4] Tipo: RPAREN, Valor: )
+[Línea 5] Tipo: INSTANCE_VAR, Valor: @titulo
+[Línea 5] Tipo: ASSIGN, Valor: =
+[Línea 5] Tipo: IDENTIFIER, Valor: titulo
+[Línea 6] Tipo: INSTANCE_VAR, Valor: @completada
+[Línea 6] Tipo: ASSIGN, Valor: =
+[Línea 6] Tipo: FALSE, Valor: false
+[Línea 7] Tipo: END, Valor: end
+[Línea 8] Tipo: DEF, Valor: def
+[Línea 8] Tipo: IDENTIFIER, Valor: marcar_como_completada
+[Línea 9] Tipo: INSTANCE_VAR, Valor: @completada
+[Línea 9] Tipo: ASSIGN, Valor: =
+[Línea 9] Tipo: TRUE, Valor: true
+[Línea 10] Tipo: END, Valor: end
+[Línea 11] Tipo: DEF, Valor: def
+[Línea 11] Tipo: IDENTIFIER, Valor: mostrar
+[Línea 12] Tipo: IDENTIFIER, Valor: estado
+[Línea 12] Tipo: ASSIGN, Valor: =
+[Línea 12] Tipo: INSTANCE_VAR, Valor: @completada
+[Línea 12] Tipo: STRING, Valor: ✔️
+[Línea 12] Tipo: STRING, Valor: ❌
+[Línea 13] Tipo: IDENTIFIER, Valor: puts
+[Línea 13] Tipo: STRING, Valor: #{estado} #{@titulo}
+[Línea 14] Tipo: END, Valor: end
+[Línea 15] Tipo: END, Valor: end
+[Línea 16] Tipo: IDENTIFIER, Valor: tareas
+[Línea 16] Tipo: ASSIGN, Valor: =
+[Línea 16] Tipo: LBRACKET, Valor: [
+[Línea 16] Tipo: CONSTANT, Valor: Tarea
+[Línea 16] Tipo: DOT, Valor: .
+[Línea 16] Tipo: IDENTIFIER, Valor: new
+[Línea 16] Tipo: LPAREN, Valor: (
+[Línea 16] Tipo: STRING, Valor: Estudiar para el examen
+[Línea 16] Tipo: RPAREN, Valor: )
+[Línea 16] Tipo: COMMA, Valor: ,
+[Línea 16] Tipo: CONSTANT, Valor: Tarea
+[Línea 16] Tipo: DOT, Valor: .
+[Línea 16] Tipo: IDENTIFIER, Valor: new
+[Línea 16] Tipo: LPAREN, Valor: (
+[Línea 16] Tipo: STRING, Valor: Preparar presentación
+[Línea 16] Tipo: RPAREN, Valor: )
+[Línea 16] Tipo: RBRACKET, Valor: ]
+[Línea 17] Tipo: IDENTIFIER, Valor: tareas
+[Línea 17] Tipo: LBRACKET, Valor: [
+[Línea 17] Tipo: INTEGER, Valor: 0
+[Línea 17] Tipo: RBRACKET, Valor: ]
+[Línea 17] Tipo: DOT, Valor: .
+[Línea 17] Tipo: IDENTIFIER, Valor: marcar_como_completada
+[Línea 18] Tipo: IDENTIFIER, Valor: tareas
+[Línea 18] Tipo: DOT, Valor: .
+[Línea 18] Tipo: IDENTIFIER, Valor: each
+[Línea 18] Tipo: LPAREN, Valor: (
+[Línea 18] Tipo: IDENTIFIER, Valor: mostrar
+[Línea 18] Tipo: RPAREN, Valor: )
+
+Total de tokens: 64
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: ':' en la línea 3
+[Error Léxico] Carácter ilegal: ':' en la línea 3
+[Error Léxico] Carácter ilegal: '?' en la línea 12
+[Error Léxico] Carácter ilegal: ':' en la línea 12
+[Error Léxico] Carácter ilegal: '&' en la línea 18
+[Error Léxico] Carácter ilegal: ':' en la línea 18
+
+Total de errores: 6

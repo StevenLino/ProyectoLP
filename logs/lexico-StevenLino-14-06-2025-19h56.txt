@@ -1,0 +1,52 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:56
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: IDENTIFIER, Valor: clase
+[Línea 2] Tipo: CONSTANT, Valor: Usuario
+[Línea 3] Tipo: DEF, Valor: def
+[Línea 3] Tipo: IDENTIFIER, Valor: iniciar
+[Línea 3] Tipo: LPAREN, Valor: (
+[Línea 3] Tipo: IDENTIFIER, Valor: nombre
+[Línea 4] Tipo: INSTANCE_VAR, Valor: @nombre
+[Línea 4] Tipo: ASSIGN, Valor: =
+[Línea 4] Tipo: IDENTIFIER, Valor: nombre
+[Línea 5] Tipo: END, Valor: end
+[Línea 7] Tipo: DEF, Valor: def
+[Línea 7] Tipo: IDENTIFIER, Valor: saludar
+[Línea 8] Tipo: IDENTIFIER, Valor: puts
+[Línea 8] Tipo: STRING, Valor: Hola, soy #{@nombre}
+[Línea 9] Tipo: END, Valor: end
+[Línea 10] Tipo: END, Valor: end
+[Línea 12] Tipo: IDENTIFIER, Valor: persona
+[Línea 12] Tipo: ASSIGN, Valor: =
+[Línea 12] Tipo: CONSTANT, Valor: Usuario
+[Línea 12] Tipo: DOT, Valor: .
+[Línea 12] Tipo: IDENTIFIER, Valor: new
+[Línea 12] Tipo: LPAREN, Valor: (
+[Línea 12] Tipo: STRING, Valor: Ana
+[Línea 12] Tipo: RPAREN, Valor: )
+[Línea 13] Tipo: IDENTIFIER, Valor: x
+[Línea 13] Tipo: ASSIGN, Valor: =
+[Línea 13] Tipo: STRING, Valor: 5
+[Línea 14] Tipo: IDENTIFIER, Valor: y
+[Línea 14] Tipo: ASSIGN, Valor: =
+[Línea 14] Tipo: INTEGER, Valor: 3
+[Línea 15] Tipo: IDENTIFIER, Valor: resultado
+[Línea 15] Tipo: ASSIGN, Valor: =
+[Línea 15] Tipo: IDENTIFIER, Valor: x
+[Línea 15] Tipo: TIMES, Valor: *
+[Línea 15] Tipo: IDENTIFIER, Valor: y
+[Línea 16] Tipo: IDENTIFIER, Valor: persona
+[Línea 16] Tipo: DOT, Valor: .
+[Línea 16] Tipo: IDENTIFIER, Valor: saludar
+[Línea 16] Tipo: LOGICAL_NOT, Valor: !
+[Línea 16] Tipo: LOGICAL_NOT, Valor: !
+
+Total de tokens: 40
+
+--- ERRORES ---
+No se encontraron errores léxicos.
+
+Total de errores: 0

@@ -1,0 +1,93 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:58
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: IDENTIFIER, Valor: puts
+[Línea 2] Tipo: STRING, Valor: ¿Cuántas veces debo saludar?
+[Línea 3] Tipo: IDENTIFIER, Valor: veces
+[Línea 3] Tipo: ASSIGN, Valor: =
+[Línea 3] Tipo: IDENTIFIER, Valor: gets
+[Línea 3] Tipo: DOT, Valor: .
+[Línea 3] Tipo: IDENTIFIER, Valor: chomp
+[Línea 3] Tipo: DOT, Valor: .
+[Línea 3] Tipo: IDENTIFIER, Valor: to_i
+[Línea 5] Tipo: IDENTIFIER, Valor: i
+[Línea 5] Tipo: ASSIGN, Valor: =
+[Línea 5] Tipo: INTEGER, Valor: 0
+[Línea 6] Tipo: UNTIL, Valor: until
+[Línea 6] Tipo: IDENTIFIER, Valor: i
+[Línea 6] Tipo: EQUAL_EQUAL, Valor: ==
+[Línea 6] Tipo: IDENTIFIER, Valor: veces
+[Línea 7] Tipo: IDENTIFIER, Valor: puts
+[Línea 7] Tipo: STRING, Valor: ¡Hola número #{i + 1}!
+[Línea 8] Tipo: IDENTIFIER, Valor: i
+[Línea 8] Tipo: PLUS_ASSIGN, Valor: +=
+[Línea 8] Tipo: INTEGER, Valor: 1
+[Línea 9] Tipo: END, Valor: end
+[Línea 11] Tipo: DEF, Valor: def
+[Línea 11] Tipo: IDENTIFIER, Valor: calcular_area
+[Línea 11] Tipo: LPAREN, Valor: (
+[Línea 11] Tipo: IDENTIFIER, Valor: base
+[Línea 11] Tipo: COMMA, Valor: ,
+[Línea 11] Tipo: IDENTIFIER, Valor: altura
+[Línea 11] Tipo: RPAREN, Valor: )
+[Línea 12] Tipo: IF, Valor: if
+[Línea 12] Tipo: IDENTIFIER, Valor: base
+[Línea 12] Tipo: LESS_EQUAL, Valor: <=
+[Línea 12] Tipo: INTEGER, Valor: 0
+[Línea 12] Tipo: LOGICAL_OR, Valor: ||
+[Línea 12] Tipo: IDENTIFIER, Valor: altura
+[Línea 12] Tipo: LESS_EQUAL, Valor: <=
+[Línea 12] Tipo: INTEGER, Valor: 0
+[Línea 13] Tipo: RETURN, Valor: return
+[Línea 13] Tipo: STRING, Valor: Valores inválidos
+[Línea 14] Tipo: END, Valor: end
+[Línea 15] Tipo: IDENTIFIER, Valor: area
+[Línea 15] Tipo: ASSIGN, Valor: =
+[Línea 15] Tipo: IDENTIFIER, Valor: base
+[Línea 15] Tipo: TIMES, Valor: *
+[Línea 15] Tipo: IDENTIFIER, Valor: altura
+[Línea 16] Tipo: RETURN, Valor: return
+[Línea 16] Tipo: IDENTIFIER, Valor: area
+[Línea 17] Tipo: END, Valor: end
+[Línea 19] Tipo: IDENTIFIER, Valor: base
+[Línea 19] Tipo: ASSIGN, Valor: =
+[Línea 19] Tipo: STRING, Valor: diez
+[Línea 20] Tipo: IDENTIFIER, Valor: altura
+[Línea 20] Tipo: ASSIGN, Valor: =
+[Línea 20] Tipo: INTEGER, Valor: 5
+[Línea 22] Tipo: IDENTIFIER, Valor: area
+[Línea 22] Tipo: ASSIGN, Valor: =
+[Línea 22] Tipo: IDENTIFIER, Valor: calcular_area
+[Línea 22] Tipo: LPAREN, Valor: (
+[Línea 22] Tipo: IDENTIFIER, Valor: base
+[Línea 22] Tipo: COMMA, Valor: ,
+[Línea 22] Tipo: IDENTIFIER, Valor: altura
+[Línea 22] Tipo: RPAREN, Valor: )
+[Línea 23] Tipo: IDENTIFIER, Valor: puts
+[Línea 23] Tipo: STRING, Valor: Área: #{area}
+[Línea 25] Tipo: IDENTIFIER, Valor: caso
+[Línea 25] Tipo: ASSIGN, Valor: =
+[Línea 25] Tipo: INTEGER, Valor: 3
+[Línea 27] Tipo: CASE, Valor: case
+[Línea 27] Tipo: IDENTIFIER, Valor: valor
+[Línea 28] Tipo: WHEN, Valor: when
+[Línea 28] Tipo: INTEGER, Valor: 1
+[Línea 29] Tipo: IDENTIFIER, Valor: puts
+[Línea 29] Tipo: STRING, Valor: Opción 1
+[Línea 30] Tipo: WHEN, Valor: when
+[Línea 30] Tipo: INTEGER, Valor: 2
+[Línea 31] Tipo: IDENTIFIER, Valor: puts
+[Línea 31] Tipo: STRING, Valor: Opción 2
+[Línea 32] Tipo: ELSE, Valor: else
+[Línea 33] Tipo: IDENTIFIER, Valor: puts
+[Línea 33] Tipo: STRING, Valor: Otra opción
+[Línea 34] Tipo: END, Valor: end
+
+Total de tokens: 81
+
+--- ERRORES ---
+No se encontraron errores léxicos.
+
+Total de errores: 0

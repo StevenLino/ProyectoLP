@@ -230,42 +230,39 @@ lexer = lex.lex()
 
 if __name__ == "__main__":
     code = '''
-    =begin
-    Este programa define una clase base Persona,
-    y una subclase Estudiante que hereda sus
-    propiedades.
-    =end
-    
-    class Persona
-      attr_accessor :nombre, :edad
-    
-      def initialize(nombre, edad)
-        @nombre = nombre
-        @edad = edad
-      end
-    
-      def presentarse
-        puts "Hola, soy #{@nombre} y tengo #{@edad}
-    años."
-      end
+    puts "¿Cuántas veces debo saludar?"
+    veces = gets.chomp.to_i
+
+    i = 0
+    until i == veces
+        puts "¡Hola número #{i + 1}!"
+        i += 1
     end
-    
-    class Estudiante < Persona
-      attr_accessor :curso
-    
-      def initialize(nombre, edad, curso)
-        super(nombre, edad)
-        @curso = curso
-      end
-    
-      def presentarse
-        super
-        puts "Estudio en el curso #{@curso}."
-      end
+
+    def calcular_area(base, altura)
+        if base <= 0 || altura <= 0
+            return "Valores inválidos"
+        end
+        area = base * altura
+        return area
     end
-    
-    alumno = Estudiante.new("Carlos", 20, "Ruby101")
-    alumno.presentarse
+
+base = "diez"   # Error semántico: string no puede multiplicarse con int
+altura = 5
+
+area = calcular_area(base, altura)
+puts "Área: #{area}"
+
+caso = 3   # Error: variable mal usada en `case`, debe ser `case caso`
+
+case valor
+when 1
+  puts "Opción 1"
+when 2
+  puts "Opción 2"
+else
+  puts "Otra opción"
+end
     '''
 
     # MECÁNICA DE LOS LOGS
