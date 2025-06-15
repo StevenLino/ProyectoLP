@@ -1,0 +1,88 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:11
+
+--- TOKENS RECONOCIDOS ---
+[Línea 4] Tipo: CLASS, Valor: class
+[Línea 4] Tipo: CONSTANT, Valor: Persona
+[Línea 5] Tipo: IDENTIFIER, Valor: attr_accessor
+[Línea 5] Tipo: IDENTIFIER, Valor: nombre
+[Línea 5] Tipo: COMMA, Valor: ,
+[Línea 5] Tipo: IDENTIFIER, Valor: edad
+[Línea 7] Tipo: DEF, Valor: def
+[Línea 7] Tipo: IDENTIFIER, Valor: initialize
+[Línea 7] Tipo: LPAREN, Valor: (
+[Línea 7] Tipo: IDENTIFIER, Valor: nombre
+[Línea 7] Tipo: COMMA, Valor: ,
+[Línea 7] Tipo: IDENTIFIER, Valor: edad
+[Línea 7] Tipo: RPAREN, Valor: )
+[Línea 8] Tipo: INSTANCE_VAR, Valor: @nombre
+[Línea 8] Tipo: ASSIGN, Valor: =
+[Línea 8] Tipo: IDENTIFIER, Valor: nombre
+[Línea 9] Tipo: INSTANCE_VAR, Valor: @edad
+[Línea 9] Tipo: ASSIGN, Valor: =
+[Línea 9] Tipo: IDENTIFIER, Valor: edad
+[Línea 10] Tipo: END, Valor: end
+[Línea 12] Tipo: DEF, Valor: def
+[Línea 12] Tipo: IDENTIFIER, Valor: presentarse
+[Línea 13] Tipo: IDENTIFIER, Valor: puts
+[Línea 13] Tipo: STRING, Valor: Hola, soy #{@nombre} y tengo #{@edad}
+    años.
+[Línea 14] Tipo: END, Valor: end
+[Línea 15] Tipo: END, Valor: end
+[Línea 17] Tipo: CLASS, Valor: class
+[Línea 17] Tipo: CONSTANT, Valor: Estudiante
+[Línea 17] Tipo: LESS_THAN, Valor: <
+[Línea 17] Tipo: CONSTANT, Valor: Persona
+[Línea 18] Tipo: IDENTIFIER, Valor: attr_accessor
+[Línea 18] Tipo: IDENTIFIER, Valor: curso
+[Línea 20] Tipo: DEF, Valor: def
+[Línea 20] Tipo: IDENTIFIER, Valor: initialize
+[Línea 20] Tipo: LPAREN, Valor: (
+[Línea 20] Tipo: IDENTIFIER, Valor: nombre
+[Línea 20] Tipo: COMMA, Valor: ,
+[Línea 20] Tipo: IDENTIFIER, Valor: edad
+[Línea 20] Tipo: COMMA, Valor: ,
+[Línea 20] Tipo: IDENTIFIER, Valor: curso
+[Línea 20] Tipo: RPAREN, Valor: )
+[Línea 21] Tipo: SUPER, Valor: super
+[Línea 21] Tipo: LPAREN, Valor: (
+[Línea 21] Tipo: IDENTIFIER, Valor: nombre
+[Línea 21] Tipo: COMMA, Valor: ,
+[Línea 21] Tipo: IDENTIFIER, Valor: edad
+[Línea 21] Tipo: RPAREN, Valor: )
+[Línea 22] Tipo: INSTANCE_VAR, Valor: @curso
+[Línea 22] Tipo: ASSIGN, Valor: =
+[Línea 22] Tipo: IDENTIFIER, Valor: curso
+[Línea 23] Tipo: END, Valor: end
+[Línea 25] Tipo: DEF, Valor: def
+[Línea 25] Tipo: IDENTIFIER, Valor: presentarse
+[Línea 26] Tipo: SUPER, Valor: super
+[Línea 27] Tipo: IDENTIFIER, Valor: puts
+[Línea 27] Tipo: STRING, Valor: Estudio en el curso #{@curso}.
+[Línea 28] Tipo: END, Valor: end
+[Línea 29] Tipo: END, Valor: end
+[Línea 31] Tipo: IDENTIFIER, Valor: alumno
+[Línea 31] Tipo: ASSIGN, Valor: =
+[Línea 31] Tipo: CONSTANT, Valor: Estudiante
+[Línea 31] Tipo: DOT, Valor: .
+[Línea 31] Tipo: IDENTIFIER, Valor: new
+[Línea 31] Tipo: LPAREN, Valor: (
+[Línea 31] Tipo: STRING, Valor: Carlos
+[Línea 31] Tipo: COMMA, Valor: ,
+[Línea 31] Tipo: INTEGER, Valor: 20
+[Línea 31] Tipo: COMMA, Valor: ,
+[Línea 31] Tipo: STRING, Valor: Ruby101
+[Línea 31] Tipo: RPAREN, Valor: )
+[Línea 32] Tipo: IDENTIFIER, Valor: alumno
+[Línea 32] Tipo: DOT, Valor: .
+[Línea 32] Tipo: IDENTIFIER, Valor: presentarse
+
+Total de tokens: 73
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: ':' en la línea 5
+[Error Léxico] Carácter ilegal: ':' en la línea 5
+[Error Léxico] Carácter ilegal: ':' en la línea 18
+
+Total de errores: 3

@@ -230,25 +230,42 @@ lexer = lex.lex()
 
 if __name__ == "__main__":
     code = '''
-    def multiplicar(a, b)
-        if defined?(a) and defined?(b)
-            return a * b
-        els
-            puts "Parámetros faltantes"
-        end
+    =begin
+    Este programa define una clase base Persona,
+    y una subclase Estudiante que hereda sus
+    propiedades.
+    =end
+    
+    class Persona
+      attr_accessor :nombre, :edad
+    
+      def initialize(nombre, edad)
+        @nombre = nombre
+        @edad = edad
+      end
+    
+      def presentarse
+        puts "Hola, soy #{@nombre} y tengo #{@edad}
+    años."
+      end
     end
-
-    for i in 0..2
-        puts "Iteración #{i}"
+    
+    class Estudiante < Persona
+      attr_accessor :curso
+    
+      def initialize(nombre, edad, curso)
+        super(nombre, edad)
+        @curso = curso
+      end
+    
+      def presentarse
+        super
+        puts "Estudio en el curso #{@curso}."
+      end
     end
-
-    begin
-        resultado = multiplicar(2, nil)
-    rescue => e
-        puts "Error: #{e}"
-    ensure
-        puts "Proceso completado"
-    end
+    
+    alumno = Estudiante.new("Carlos", 20, "Ruby101")
+    alumno.presentarse
     '''
 
     # MECÁNICA DE LOS LOGS

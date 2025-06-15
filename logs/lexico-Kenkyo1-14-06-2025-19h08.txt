@@ -1,0 +1,81 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:08
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: IDENTIFIER, Valor: usuarios
+[Línea 2] Tipo: ASSIGN, Valor: =
+[Línea 2] Tipo: LBRACKET, Valor: [
+[Línea 2] Tipo: RBRACKET, Valor: ]
+[Línea 4] Tipo: DEF, Valor: def
+[Línea 4] Tipo: IDENTIFIER, Valor: registrar_usuario
+[Línea 5] Tipo: IDENTIFIER, Valor: print
+[Línea 5] Tipo: STRING, Valor: Ingresa el nombre: 
+[Línea 6] Tipo: IDENTIFIER, Valor: nombre
+[Línea 6] Tipo: ASSIGN, Valor: =
+[Línea 6] Tipo: IDENTIFIER, Valor: gets
+[Línea 6] Tipo: DOT, Valor: .
+[Línea 6] Tipo: IDENTIFIER, Valor: chomp
+[Línea 8] Tipo: IDENTIFIER, Valor: print
+[Línea 8] Tipo: STRING, Valor: Ingresa la edad: 
+[Línea 9] Tipo: IDENTIFIER, Valor: edad
+[Línea 9] Tipo: ASSIGN, Valor: =
+[Línea 9] Tipo: IDENTIFIER, Valor: gets
+[Línea 9] Tipo: DOT, Valor: .
+[Línea 9] Tipo: IDENTIFIER, Valor: chomp
+[Línea 9] Tipo: DOT, Valor: .
+[Línea 9] Tipo: IDENTIFIER, Valor: to_i
+[Línea 11] Tipo: IDENTIFIER, Valor: usuario
+[Línea 11] Tipo: ASSIGN, Valor: =
+[Línea 11] Tipo: LBRACE, Valor: {
+[Línea 11] Tipo: IDENTIFIER, Valor: nombre
+[Línea 11] Tipo: IDENTIFIER, Valor: nombre
+[Línea 11] Tipo: COMMA, Valor: ,
+[Línea 11] Tipo: IDENTIFIER, Valor: edad
+[Línea 11] Tipo: IDENTIFIER, Valor: edad
+[Línea 11] Tipo: RBRACE, Valor: }
+[Línea 12] Tipo: RETURN, Valor: return
+[Línea 12] Tipo: IDENTIFIER, Valor: usuario
+[Línea 13] Tipo: END, Valor: end
+[Línea 15] Tipo: INTEGER, Valor: 3
+[Línea 15] Tipo: DOT, Valor: .
+[Línea 15] Tipo: IDENTIFIER, Valor: times
+[Línea 15] Tipo: DO, Valor: do
+[Línea 16] Tipo: IDENTIFIER, Valor: usuario
+[Línea 16] Tipo: ASSIGN, Valor: =
+[Línea 16] Tipo: IDENTIFIER, Valor: registrar_usuario
+[Línea 17] Tipo: IDENTIFIER, Valor: usuarios
+[Línea 17] Tipo: LESS_THAN, Valor: <
+[Línea 17] Tipo: LESS_THAN, Valor: <
+[Línea 17] Tipo: IDENTIFIER, Valor: usuario
+[Línea 18] Tipo: END, Valor: end
+[Línea 20] Tipo: IDENTIFIER, Valor: usuarios
+[Línea 20] Tipo: DOT, Valor: .
+[Línea 20] Tipo: IDENTIFIER, Valor: each
+[Línea 20] Tipo: DO, Valor: do
+[Línea 20] Tipo: IDENTIFIER, Valor: u
+[Línea 21] Tipo: IF, Valor: if
+[Línea 21] Tipo: IDENTIFIER, Valor: u
+[Línea 21] Tipo: LBRACKET, Valor: [
+[Línea 21] Tipo: IDENTIFIER, Valor: edad
+[Línea 21] Tipo: RBRACKET, Valor: ]
+[Línea 21] Tipo: GREATER_EQUAL, Valor: >=
+[Línea 21] Tipo: INTEGER, Valor: 18
+[Línea 22] Tipo: IDENTIFIER, Valor: puts
+[Línea 22] Tipo: STRING, Valor: #{u[:nombre]} es mayor de edad.
+[Línea 23] Tipo: ELSE, Valor: else
+[Línea 24] Tipo: IDENTIFIER, Valor: puts
+[Línea 24] Tipo: STRING, Valor: #{u[:nombre]} es menor de edad.
+[Línea 25] Tipo: END, Valor: end
+[Línea 26] Tipo: END, Valor: end
+
+Total de tokens: 65
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: ':' en la línea 11
+[Error Léxico] Carácter ilegal: ':' en la línea 11
+[Error Léxico] Carácter ilegal: '|' en la línea 20
+[Error Léxico] Carácter ilegal: '|' en la línea 20
+[Error Léxico] Carácter ilegal: ':' en la línea 21
+
+Total de errores: 5

@@ -1,0 +1,94 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 14/06/2025
+Hora: 19:10
+
+--- TOKENS RECONOCIDOS ---
+[Línea 2] Tipo: DEF, Valor: def
+[Línea 2] Tipo: IDENTIFIER, Valor: calcular
+[Línea 2] Tipo: LPAREN, Valor: (
+[Línea 2] Tipo: IDENTIFIER, Valor: a
+[Línea 2] Tipo: COMMA, Valor: ,
+[Línea 2] Tipo: IDENTIFIER, Valor: b
+[Línea 2] Tipo: COMMA, Valor: ,
+[Línea 2] Tipo: IDENTIFIER, Valor: operador
+[Línea 2] Tipo: RPAREN, Valor: )
+[Línea 3] Tipo: CASE, Valor: case
+[Línea 3] Tipo: IDENTIFIER, Valor: operador
+[Línea 4] Tipo: WHEN, Valor: when
+[Línea 4] Tipo: STRING, Valor: +
+[Línea 5] Tipo: RETURN, Valor: return
+[Línea 5] Tipo: IDENTIFIER, Valor: a
+[Línea 5] Tipo: PLUS, Valor: +
+[Línea 5] Tipo: IDENTIFIER, Valor: b
+[Línea 6] Tipo: WHEN, Valor: when
+[Línea 6] Tipo: STRING, Valor: -
+[Línea 7] Tipo: RETURN, Valor: return
+[Línea 7] Tipo: IDENTIFIER, Valor: a
+[Línea 7] Tipo: MINUS, Valor: -
+[Línea 7] Tipo: IDENTIFIER, Valor: b
+[Línea 8] Tipo: WHEN, Valor: when
+[Línea 8] Tipo: STRING, Valor: *
+[Línea 9] Tipo: RETURN, Valor: return
+[Línea 9] Tipo: IDENTIFIER, Valor: a
+[Línea 9] Tipo: TIMES, Valor: *
+[Línea 9] Tipo: IDENTIFIER, Valor: b
+[Línea 10] Tipo: WHEN, Valor: when
+[Línea 10] Tipo: STRING, Valor: /
+[Línea 11] Tipo: RETURN, Valor: return
+[Línea 11] Tipo: IDENTIFIER, Valor: b
+[Línea 11] Tipo: NOT_EQUAL, Valor: !=
+[Línea 11] Tipo: INTEGER, Valor: 0
+[Línea 11] Tipo: IDENTIFIER, Valor: a
+[Línea 11] Tipo: DIVIDE, Valor: /
+[Línea 11] Tipo: IDENTIFIER, Valor: b
+[Línea 11] Tipo: STRING, Valor: Error: división por cero
+[Línea 12] Tipo: ELSE, Valor: else
+[Línea 13] Tipo: RETURN, Valor: return
+[Línea 13] Tipo: STRING, Valor: Operador no válido
+[Línea 14] Tipo: END, Valor: end
+[Línea 15] Tipo: END, Valor: end
+[Línea 19] Tipo: IDENTIFIER, Valor: print
+[Línea 19] Tipo: STRING, Valor: Número 1: 
+[Línea 20] Tipo: IDENTIFIER, Valor: num1
+[Línea 20] Tipo: ASSIGN, Valor: =
+[Línea 20] Tipo: IDENTIFIER, Valor: gets
+[Línea 20] Tipo: DOT, Valor: .
+[Línea 20] Tipo: IDENTIFIER, Valor: chomp
+[Línea 20] Tipo: DOT, Valor: .
+[Línea 20] Tipo: IDENTIFIER, Valor: to_f
+[Línea 21] Tipo: IDENTIFIER, Valor: print
+[Línea 21] Tipo: STRING, Valor: Número 2: 
+[Línea 22] Tipo: IDENTIFIER, Valor: num2
+[Línea 22] Tipo: ASSIGN, Valor: =
+[Línea 22] Tipo: IDENTIFIER, Valor: gets
+[Línea 22] Tipo: DOT, Valor: .
+[Línea 22] Tipo: IDENTIFIER, Valor: chomp
+[Línea 22] Tipo: DOT, Valor: .
+[Línea 22] Tipo: IDENTIFIER, Valor: to_f
+[Línea 24] Tipo: IDENTIFIER, Valor: print
+[Línea 24] Tipo: STRING, Valor: Operador (+, -, *, /): 
+[Línea 25] Tipo: IDENTIFIER, Valor: op
+[Línea 25] Tipo: ASSIGN, Valor: =
+[Línea 25] Tipo: IDENTIFIER, Valor: gets
+[Línea 25] Tipo: DOT, Valor: .
+[Línea 25] Tipo: IDENTIFIER, Valor: chomp
+[Línea 27] Tipo: IDENTIFIER, Valor: resultado
+[Línea 27] Tipo: ASSIGN, Valor: =
+[Línea 27] Tipo: IDENTIFIER, Valor: calcular
+[Línea 27] Tipo: LPAREN, Valor: (
+[Línea 27] Tipo: IDENTIFIER, Valor: num1
+[Línea 27] Tipo: COMMA, Valor: ,
+[Línea 27] Tipo: IDENTIFIER, Valor: num2
+[Línea 27] Tipo: COMMA, Valor: ,
+[Línea 27] Tipo: IDENTIFIER, Valor: op
+[Línea 27] Tipo: RPAREN, Valor: )
+[Línea 28] Tipo: IDENTIFIER, Valor: puts
+[Línea 28] Tipo: STRING, Valor: Resultado: #{resultado}
+
+Total de tokens: 81
+
+--- ERRORES ---
+[Error Léxico] Carácter ilegal: '?' en la línea 11
+[Error Léxico] Carácter ilegal: ':' en la línea 11
+
+Total de errores: 2
