@@ -46,6 +46,7 @@ reserved = {
     "while": "WHILE",
     "yield": "YIELD",
 
+    "gets": "GETS",
     #Correcion Inicio - Steven Lino
     "puts": "PUTS"
     #Correcion Fin - Steven Lino

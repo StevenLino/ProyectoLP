@@ -1,0 +1,795 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ALIAS
+    AND
+    AND_ASSIGN
+    BEGIN
+    BREAK
+    CASE
+    CLASS
+    CLASS_VAR
+    COMMA
+    CONSTANT
+    DEF
+    DEFINEDQ
+    DIVIDE_ASSIGN
+    DO
+    ELSE
+    ELSIF
+    END
+    ENSURE
+    EQUAL_EQUAL
+    FALSE
+    FOR
+    GLOBAL_VAR
+    GREATER_EQUAL
+    GREATER_THAN
+    IF
+    IN
+    INSTANCE_VAR
+    LBRACE
+    LBRACKET
+    LESS_EQUAL
+    LESS_THAN
+    LOGICAL_NOT
+    LPAREN
+    MATCH_REGEX
+    MINUS_ASSIGN
+    MODULE
+    NEXT
+    NIL
+    NOT
+    NOT_EQUAL
+    NOT_MATCH_REGEX
+    OR
+    OR_ASSIGN
+    PLUS_ASSIGN
+    RANGE_EXCLUSIVE
+    RANGE_INCLUSIVE
+    RBRACE
+    RBRACKET
+    REDO
+    RESCUE
+    RETRY
+    RETURN
+    RPAREN
+    SELF
+    SEMICOLON
+    SUPER
+    THEN
+    TIMES_ASSIGN
+    TRUE
+    UNDEF
+    UNLESS
+    UNTIL
+    WHEN
+    WHILE
+    YIELD
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> print
+Rule 2     statement -> input
+Rule 3     statement -> assignment
+Rule 4     statement -> expression
+Rule 5     print -> PUTS expression
+Rule 6     input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+Rule 7     assignment -> IDENTIFIER ASSIGN expression
+Rule 8     expression -> expression PLUS expression
+Rule 9     expression -> expression MINUS expression
+Rule 10    expression -> expression TIMES expression
+Rule 11    expression -> expression DIVIDE expression
+Rule 12    expression -> expression POWER expression
+Rule 13    expression -> expression MODULO expression
+Rule 14    expression -> INTEGER
+Rule 15    expression -> FLOAT
+Rule 16    expression -> STRING
+Rule 17    expression -> IDENTIFIER
+Rule 18    condition -> expression LOGICAL_AND expression
+Rule 19    condition -> expression LOGICAL_OR expression
+
+Terminals, with rules where they appear
+
+ALIAS                : 
+AND                  : 
+AND_ASSIGN           : 
+ASSIGN               : 6 7
+BEGIN                : 
+BREAK                : 
+CASE                 : 
+CLASS                : 
+CLASS_VAR            : 
+COMMA                : 
+CONSTANT             : 
+DEF                  : 
+DEFINEDQ             : 
+DIVIDE               : 11
+DIVIDE_ASSIGN        : 
+DO                   : 
+DOT                  : 6
+ELSE                 : 
+ELSIF                : 
+END                  : 
+ENSURE               : 
+EQUAL_EQUAL          : 
+FALSE                : 
+FLOAT                : 15
+FOR                  : 
+GETS                 : 6
+GLOBAL_VAR           : 
+GREATER_EQUAL        : 
+GREATER_THAN         : 
+IDENTIFIER           : 6 6 7 17
+IF                   : 
+IN                   : 
+INSTANCE_VAR         : 
+INTEGER              : 14
+LBRACE               : 
+LBRACKET             : 
+LESS_EQUAL           : 
+LESS_THAN            : 
+LOGICAL_AND          : 18
+LOGICAL_NOT          : 
+LOGICAL_OR           : 19
+LPAREN               : 
+MATCH_REGEX          : 
+MINUS                : 9
+MINUS_ASSIGN         : 
+MODULE               : 
+MODULO               : 13
+NEXT                 : 
+NIL                  : 
+NOT                  : 
+NOT_EQUAL            : 
+NOT_MATCH_REGEX      : 
+OR                   : 
+OR_ASSIGN            : 
+PLUS                 : 8
+PLUS_ASSIGN          : 
+POWER                : 12
+PUTS                 : 5
+RANGE_EXCLUSIVE      : 
+RANGE_INCLUSIVE      : 
+RBRACE               : 
+RBRACKET             : 
+REDO                 : 
+RESCUE               : 
+RETRY                : 
+RETURN               : 
+RPAREN               : 
+SELF                 : 
+SEMICOLON            : 
+STRING               : 16
+SUPER                : 
+THEN                 : 
+TIMES                : 10
+TIMES_ASSIGN         : 
+TRUE                 : 
+UNDEF                : 
+UNLESS               : 
+UNTIL                : 
+WHEN                 : 
+WHILE                : 
+YIELD                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 3
+condition            : 
+expression           : 4 5 7 8 8 9 9 10 10 11 11 12 12 13 13 18 18 19 19
+input                : 2
+print                : 1
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . print
+    (2) statement -> . input
+    (3) statement -> . assignment
+    (4) statement -> . expression
+    (5) print -> . PUTS expression
+    (6) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (7) assignment -> . IDENTIFIER ASSIGN expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    PUTS            shift and go to state 6
+    IDENTIFIER      shift and go to state 7
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+
+    statement                      shift and go to state 1
+    print                          shift and go to state 2
+    input                          shift and go to state 3
+    assignment                     shift and go to state 4
+    expression                     shift and go to state 5
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> print .
+
+    $end            reduce using rule 1 (statement -> print .)
+
+
+state 3
+
+    (2) statement -> input .
+
+    $end            reduce using rule 2 (statement -> input .)
+
+
+state 4
+
+    (3) statement -> assignment .
+
+    $end            reduce using rule 3 (statement -> assignment .)
+
+
+state 5
+
+    (4) statement -> expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+    $end            reduce using rule 4 (statement -> expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+
+state 6
+
+    (5) print -> PUTS . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 17
+
+state 7
+
+    (6) input -> IDENTIFIER . ASSIGN GETS DOT IDENTIFIER
+    (7) assignment -> IDENTIFIER . ASSIGN expression
+    (17) expression -> IDENTIFIER .
+
+    ASSIGN          shift and go to state 19
+    PLUS            reduce using rule 17 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 17 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 17 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 17 (expression -> IDENTIFIER .)
+    POWER           reduce using rule 17 (expression -> IDENTIFIER .)
+    MODULO          reduce using rule 17 (expression -> IDENTIFIER .)
+    $end            reduce using rule 17 (expression -> IDENTIFIER .)
+
+
+state 8
+
+    (14) expression -> INTEGER .
+
+    PLUS            reduce using rule 14 (expression -> INTEGER .)
+    MINUS           reduce using rule 14 (expression -> INTEGER .)
+    TIMES           reduce using rule 14 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 14 (expression -> INTEGER .)
+    POWER           reduce using rule 14 (expression -> INTEGER .)
+    MODULO          reduce using rule 14 (expression -> INTEGER .)
+    $end            reduce using rule 14 (expression -> INTEGER .)
+
+
+state 9
+
+    (15) expression -> FLOAT .
+
+    PLUS            reduce using rule 15 (expression -> FLOAT .)
+    MINUS           reduce using rule 15 (expression -> FLOAT .)
+    TIMES           reduce using rule 15 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 15 (expression -> FLOAT .)
+    POWER           reduce using rule 15 (expression -> FLOAT .)
+    MODULO          reduce using rule 15 (expression -> FLOAT .)
+    $end            reduce using rule 15 (expression -> FLOAT .)
+
+
+state 10
+
+    (16) expression -> STRING .
+
+    PLUS            reduce using rule 16 (expression -> STRING .)
+    MINUS           reduce using rule 16 (expression -> STRING .)
+    TIMES           reduce using rule 16 (expression -> STRING .)
+    DIVIDE          reduce using rule 16 (expression -> STRING .)
+    POWER           reduce using rule 16 (expression -> STRING .)
+    MODULO          reduce using rule 16 (expression -> STRING .)
+    $end            reduce using rule 16 (expression -> STRING .)
+
+
+state 11
+
+    (8) expression -> expression PLUS . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 20
+
+state 12
+
+    (9) expression -> expression MINUS . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 21
+
+state 13
+
+    (10) expression -> expression TIMES . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 22
+
+state 14
+
+    (11) expression -> expression DIVIDE . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 23
+
+state 15
+
+    (12) expression -> expression POWER . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 24
+
+state 16
+
+    (13) expression -> expression MODULO . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 25
+
+state 17
+
+    (5) print -> PUTS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+    $end            reduce using rule 5 (print -> PUTS expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+
+state 18
+
+    (17) expression -> IDENTIFIER .
+
+    PLUS            reduce using rule 17 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 17 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 17 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 17 (expression -> IDENTIFIER .)
+    POWER           reduce using rule 17 (expression -> IDENTIFIER .)
+    MODULO          reduce using rule 17 (expression -> IDENTIFIER .)
+    $end            reduce using rule 17 (expression -> IDENTIFIER .)
+
+
+state 19
+
+    (6) input -> IDENTIFIER ASSIGN . GETS DOT IDENTIFIER
+    (7) assignment -> IDENTIFIER ASSIGN . expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression POWER expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . INTEGER
+    (15) expression -> . FLOAT
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER
+
+    GETS            shift and go to state 26
+    INTEGER         shift and go to state 8
+    FLOAT           shift and go to state 9
+    STRING          shift and go to state 10
+    IDENTIFIER      shift and go to state 18
+
+    expression                     shift and go to state 27
+
+state 20
+
+    (8) expression -> expression PLUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 8 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! POWER           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+
+
+state 21
+
+    (9) expression -> expression MINUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 9 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! POWER           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+
+
+state 22
+
+    (10) expression -> expression TIMES expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 10 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! POWER           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! MODULO          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+
+
+state 23
+
+    (11) expression -> expression DIVIDE expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 11 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! POWER           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! MODULO          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+
+
+state 24
+
+    (12) expression -> expression POWER expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 12 (expression -> expression POWER expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 12 (expression -> expression POWER expression .) ]
+  ! MINUS           [ reduce using rule 12 (expression -> expression POWER expression .) ]
+  ! TIMES           [ reduce using rule 12 (expression -> expression POWER expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression POWER expression .) ]
+  ! POWER           [ reduce using rule 12 (expression -> expression POWER expression .) ]
+  ! MODULO          [ reduce using rule 12 (expression -> expression POWER expression .) ]
+
+
+state 25
+
+    (13) expression -> expression MODULO expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    $end            reduce using rule 13 (expression -> expression MODULO expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+  ! PLUS            [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+  ! MINUS           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+  ! TIMES           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+  ! DIVIDE          [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+  ! POWER           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+  ! MODULO          [ reduce using rule 13 (expression -> expression MODULO expression .) ]
+
+
+state 26
+
+    (6) input -> IDENTIFIER ASSIGN GETS . DOT IDENTIFIER
+
+    DOT             shift and go to state 28
+
+
+state 27
+
+    (7) assignment -> IDENTIFIER ASSIGN expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . POWER expression
+    (13) expression -> expression . MODULO expression
+
+    $end            reduce using rule 7 (assignment -> IDENTIFIER ASSIGN expression .)
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+    POWER           shift and go to state 15
+    MODULO          shift and go to state 16
+
+
+state 28
+
+    (6) input -> IDENTIFIER ASSIGN GETS DOT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 29
+
+
+state 29
+
+    (6) input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .
+
+    $end            reduce using rule 6 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 20 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 20 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 20 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 21 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 21 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 22 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 22 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 22 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 23 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 23 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 23 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 23 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 23 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 24 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 24 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 25 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 25 resolved as shift

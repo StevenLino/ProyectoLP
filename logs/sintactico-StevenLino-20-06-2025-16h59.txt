@@ -1,0 +1,8 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 20/06/2025
+Hora: 16:59
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: IDENTIFIER ('veces') en la línea 2
+[Error Sintáctico] Token inesperado: RETURN ('return') en la línea 15
+[Error Sintáctico] Token inesperado: IDENTIFIER ('altura') en la línea 19
