@@ -44,7 +44,11 @@ reserved = {
     "until": "UNTIL",
     "when": "WHEN",
     "while": "WHILE",
-    "yield": "YIELD"
+    "yield": "YIELD",
+
+    #Correcion Inicio - Steven Lino
+    "puts": "PUTS"
+    #Correcion Fin - Steven Lino
 }
 
 # SILVIA SAQUISILI - FIN
@@ -179,6 +183,12 @@ def t_CLASS_VAR(t):
 
 def t_CONSTANT(t):
     r'[A-Z][a-zA-Z_0-9]*'
+
+    # Correcion Inicio -Steven Lino
+    if t.value in reserved:
+        t.type = reserved[t.value]  # e.g., BEGIN, END
+    # Correcion Fin -Steven Lino
+
     return t
 
 def t_IDENTIFIER(t):
