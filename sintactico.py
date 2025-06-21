@@ -7,8 +7,27 @@ import subprocess
 errores_sintacticos = []
 
 # Indicar la regla inicial del parser:
-start = 'statement'
+#start = 'statement'
 
+# Silvia Saquisili - Inicio
+# Regla inicial
+start = 'program'
+
+# Regla para representar el programa completo
+def p_program(p):
+    '''program : statement_list'''
+    p[0] = ('program', p[1])
+
+# Regla para permitir múltiples declaraciones
+def p_statement_list(p):
+    '''statement_list : statement_list statement
+                      | statement'''
+    if len(p) == 3:
+        p[0] = p[1] + [p[2]]
+    else:
+        p[0] = [p[1]]
+
+# Silvia Saquisili - Final
 
 #Steven Lino - Inicio
 #--------------------
@@ -17,7 +36,8 @@ def p_statement(p):
     '''statement : print
                  | input
                  | assignment
-                 | expression'''
+                 | expression
+                 | if_statement'''
     p[0] = p[1]
 
 def p_print(p):
@@ -58,6 +78,29 @@ def p_condition_logical(p):
     '''condition : expression LOGICAL_AND expression
                  | expression LOGICAL_OR expression'''
     p[0] = ('logical', p[2], p[1], p[3])
+
+# Silvia Saquisili - Inicio
+
+# Regla para los comparadores en condition
+def p_condition_comparison(p):
+    ''' condition : expression EQUAL_EQUAL expression
+                  | expression NOT_EQUAL expression
+                  | expression GREATER_THAN expression
+                  | expression LESS_THAN expression
+                  | expression GREATER_EQUAL expression
+                  | expression LESS_EQUAL expression'''
+    p[0] = ('compare', p[2], p[1], p[3])
+
+# Reglas para los condicionales if, else, elsif, end en Ruby
+def p_if_statement(p):
+    '''if_statement : IF condition statement_list END_KW
+                    | IF condition statement_list ELSE statement_list END_KW'''
+    if len(p) == 5:
+        p[0] = ('if', p[2], p[3])
+    else:
+        p[0] = ('if_else', p[2], p[3], p[5])
+
+# Silvia Saquisili - Fin
 
 def p_error(p):
     if p:

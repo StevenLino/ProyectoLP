@@ -11,7 +11,7 @@ import subprocess
 reserved = {
     "alias": "ALIAS",
     "and": "AND",
-    "begin": "BEGIN",
+    "begin": "BEGIN_KW",  # Corrección - Silvia Saquisili
     "break": "BREAK",
     "case": "CASE",
     "class": "CLASS",
@@ -20,7 +20,7 @@ reserved = {
     "do": "DO",
     "else": "ELSE",
     "elsif": "ELSIF",
-    "end": "END",
+    "end": "END_KW",  # Corrección - Silvia Saquisili
     "ensure": "ENSURE",
     "false": "FALSE",
     "for": "FOR",
@@ -241,40 +241,13 @@ lexer = lex.lex()
 
 if __name__ == "__main__":
     code = '''
-    puts "¿Cuántas veces debo saludar?"
-    veces = gets.chomp.to_i
+        =begin
+        Esto es un comentario
+        con varias líneas
+        =end
 
-    i = 0
-    until i == veces
-        puts "¡Hola número #{i + 1}!"
-        i += 1
-    end
-
-    def calcular_area(base, altura)
-        if base <= 0 || altura <= 0
-            return "Valores inválidos"
-        end
-        area = base * altura
-        return area
-    end
-
-base = "diez"   # Error semántico: string no puede multiplicarse con int
-altura = 5
-
-area = calcular_area(base, altura)
-puts "Área: #{area}"
-
-caso = 3   # Error: variable mal usada en `case`, debe ser `case caso`
-
-case valor
-when 1
-  puts "Opción 1"
-when 2
-  puts "Opción 2"
-else
-  puts "Otra opción"
-end
-    '''
+        puts "Esto sí se ejecuta"
+        '''
 
     # MECÁNICA DE LOS LOGS
 

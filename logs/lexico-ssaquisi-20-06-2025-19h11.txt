@@ -1,0 +1,14 @@
+=== LOG ANALIZADOR LÉXICO ===
+Fecha: 20/06/2025
+Hora: 19:11
+
+--- TOKENS RECONOCIDOS ---
+[Línea 4] Tipo: PUTS, Valor: puts
+[Línea 4] Tipo: STRING, Valor: Esto sí se ejecuta
+
+Total de tokens: 2
+
+--- ERRORES ---
+No se encontraron errores léxicos.
+
+Total de errores: 0

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'statementALIAS AND AND_ASSIGN ASSIGN BEGIN BREAK CASE CLASS CLASS_VAR COMMA CONSTANT DEF DEFINEDQ DIVIDE DIVIDE_ASSIGN DO DOT ELSE ELSIF END ENSURE EQUAL_EQUAL FALSE FLOAT FOR GETS GLOBAL_VAR GREATER_EQUAL GREATER_THAN IDENTIFIER IF IN INSTANCE_VAR INTEGER LBRACE LBRACKET LESS_EQUAL LESS_THAN LOGICAL_AND LOGICAL_NOT LOGICAL_OR LPAREN MATCH_REGEX MINUS MINUS_ASSIGN MODULE MODULO NEXT NIL NOT NOT_EQUAL NOT_MATCH_REGEX OR OR_ASSIGN PLUS PLUS_ASSIGN POWER PUTS RANGE_EXCLUSIVE RANGE_INCLUSIVE RBRACE RBRACKET REDO RESCUE RETRY RETURN RPAREN SELF SEMICOLON STRING SUPER THEN TIMES TIMES_ASSIGN TRUE UNDEF UNLESS UNTIL WHEN WHILE YIELDstatement : print\n                 | input\n                 | assignment\n                 | expressionprint : PUTS expressioninput : IDENTIFIER ASSIGN GETS DOT IDENTIFIERassignment : IDENTIFIER ASSIGN expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression POWER expression\n                  | expression MODULO expressionexpression : INTEGER\n                  | FLOATexpression : STRINGexpression : IDENTIFIERcondition : expression LOGICAL_AND expression\n                 | expression LOGICAL_OR expression'
+_lr_signature = 'programALIAS AND AND_ASSIGN ASSIGN BEGIN_KW BREAK CASE CLASS CLASS_VAR COMMA CONSTANT DEF DEFINEDQ DIVIDE DIVIDE_ASSIGN DO DOT ELSE ELSIF END_KW ENSURE EQUAL_EQUAL FALSE FLOAT FOR GETS GLOBAL_VAR GREATER_EQUAL GREATER_THAN IDENTIFIER IF IN INSTANCE_VAR INTEGER LBRACE LBRACKET LESS_EQUAL LESS_THAN LOGICAL_AND LOGICAL_NOT LOGICAL_OR LPAREN MATCH_REGEX MINUS MINUS_ASSIGN MODULE MODULO NEXT NIL NOT NOT_EQUAL NOT_MATCH_REGEX OR OR_ASSIGN PLUS PLUS_ASSIGN POWER PUTS RANGE_EXCLUSIVE RANGE_INCLUSIVE RBRACE RBRACKET REDO RESCUE RETRY RETURN RPAREN SELF SEMICOLON STRING SUPER THEN TIMES TIMES_ASSIGN TRUE UNDEF UNLESS UNTIL WHEN WHILE YIELDprogram : statement_liststatement_list : statement_list statement\n| statementstatement : print\n| input\n| assignment\n| expression\n| if_statementprint : PUTS expressioninput : IDENTIFIER ASSIGN GETS DOT IDENTIFIERassignment : IDENTIFIER ASSIGN expressionexpression : expression PLUS expression\n| expression MINUS expression\n| expression TIMES expression\n| expression DIVIDE expression\n| expression POWER expression\n| expression MODULO expressionexpression : INTEGER\n| FLOATexpression : STRINGexpression : IDENTIFIERcondition : expression LOGICAL_AND expression\n| expression LOGICAL_OR expressioncondition : expression EQUAL_EQUAL expression\n| expression NOT_EQUAL expression\n| expression GREATER_THAN expression\n| expression LESS_THAN expression\n| expression GREATER_EQUAL expression\n| expression LESS_EQUAL expressionif_statement : IF condition statement_list END_KW\n| IF condition statement_list ELSE statement_list END_KW'
     
-_lr_action_items = {'PUTS':([0,],[6,]),'IDENTIFIER':([0,6,11,12,13,14,15,16,19,28,],[7,18,18,18,18,18,18,18,18,29,]),'INTEGER':([0,6,11,12,13,14,15,16,19,],[8,8,8,8,8,8,8,8,8,]),'FLOAT':([0,6,11,12,13,14,15,16,19,],[9,9,9,9,9,9,9,9,9,]),'STRING':([0,6,11,12,13,14,15,16,19,],[10,10,10,10,10,10,10,10,10,]),'$end':([1,2,3,4,5,7,8,9,10,17,18,20,21,22,23,24,25,27,29,],[0,-1,-2,-3,-4,-17,-14,-15,-16,-5,-17,-8,-9,-10,-11,-12,-13,-7,-6,]),'PLUS':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[11,-17,-14,-15,-16,11,-17,11,11,11,11,11,11,11,]),'MINUS':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[12,-17,-14,-15,-16,12,-17,12,12,12,12,12,12,12,]),'TIMES':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[13,-17,-14,-15,-16,13,-17,13,13,13,13,13,13,13,]),'DIVIDE':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[14,-17,-14,-15,-16,14,-17,14,14,14,14,14,14,14,]),'POWER':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[15,-17,-14,-15,-16,15,-17,15,15,15,15,15,15,15,]),'MODULO':([5,7,8,9,10,17,18,20,21,22,23,24,25,27,],[16,-17,-14,-15,-16,16,-17,16,16,16,16,16,16,16,]),'ASSIGN':([7,],[19,]),'GETS':([19,],[26,]),'DOT':([26,],[28,]),}
+_lr_action_items = {'PUTS':([0,2,3,4,5,6,7,8,10,11,12,13,15,22,23,25,27,28,29,30,31,32,34,35,45,46,47,48,49,50,51,52,53,54,55,56,57,],[9,9,-3,-4,-5,-6,-7,-8,-21,-18,-19,-20,-2,-9,-21,9,-12,-13,-14,-15,-16,-17,-11,9,-30,9,-22,-23,-24,-25,-26,-27,-28,-29,-10,9,-31,]),'IDENTIFIER':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,],[10,10,-3,-4,-5,-6,-7,-8,23,-21,-18,-19,-20,23,-2,23,23,23,23,23,23,-9,-21,23,10,-12,-13,-14,-15,-16,-17,-11,10,23,23,23,23,23,23,23,23,55,-30,10,-22,-23,-24,-25,-26,-27,-28,-29,-10,10,-31,]),'INTEGER':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,],[11,11,-3,-4,-5,-6,-7,-8,11,-21,-18,-19,-20,11,-2,11,11,11,11,11,11,-9,-21,11,11,-12,-13,-14,-15,-16,-17,-11,11,11,11,11,11,11,11,11,11,-30,11,-22,-23,-24,-25,-26,-27,-28,-29,-10,11,-31,]),'FLOAT':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,],[12,12,-3,-4,-5,-6,-7,-8,12,-21,-18,-19,-20,12,-2,12,12,12,12,12,12,-9,-21,12,12,-12,-13,-14,-15,-16,-17,-11,12,12,12,12,12,12,12,12,12,-30,12,-22,-23,-24,-25,-26,-27,-28,-29,-10,12,-31,]),'STRING':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,],[13,13,-3,-4,-5,-6,-7,-8,13,-21,-18,-19,-20,13,-2,13,13,13,13,13,13,-9,-21,13,13,-12,-13,-14,-15,-16,-17,-11,13,13,13,13,13,13,13,13,13,-30,13,-22,-23,-24,-25,-26,-27,-28,-29,-10,13,-31,]),'IF':([0,2,3,4,5,6,7,8,10,11,12,13,15,22,23,25,27,28,29,30,31,32,34,35,45,46,47,48,49,50,51,52,53,54,55,56,57,],[14,14,-3,-4,-5,-6,-7,-8,-21,-18,-19,-20,-2,-9,-21,14,-12,-13,-14,-15,-16,-17,-11,14,-30,14,-22,-23,-24,-25,-26,-27,-28,-29,-10,14,-31,]),'$end':([1,2,3,4,5,6,7,8,10,11,12,13,15,22,23,27,28,29,30,31,32,34,45,55,57,],[0,-1,-3,-4,-5,-6,-7,-8,-21,-18,-19,-20,-2,-9,-21,-12,-13,-14,-15,-16,-17,-11,-30,-10,-31,]),'END_KW':([3,4,5,6,7,8,10,11,12,13,15,22,23,27,28,29,30,31,32,34,35,45,55,56,57,],[-3,-4,-5,-6,-7,-8,-21,-18,-19,-20,-2,-9,-21,-12,-13,-14,-15,-16,-17,-11,45,-30,-10,57,-31,]),'ELSE':([3,4,5,6,7,8,10,11,12,13,15,22,23,27,28,29,30,31,32,34,35,45,55,57,],[-3,-4,-5,-6,-7,-8,-21,-18,-19,-20,-2,-9,-21,-12,-13,-14,-15,-16,-17,-11,46,-30,-10,-31,]),'PLUS':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[16,-21,-18,-19,-20,16,-21,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,]),'MINUS':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[17,-21,-18,-19,-20,17,-21,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,]),'TIMES':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[18,-21,-18,-19,-20,18,-21,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,]),'DIVIDE':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[19,-21,-18,-19,-20,19,-21,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),'POWER':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[20,-21,-18,-19,-20,20,-21,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,]),'MODULO':([7,10,11,12,13,22,23,26,27,28,29,30,31,32,34,47,48,49,50,51,52,53,54,],[21,-21,-18,-19,-20,21,-21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,]),'ASSIGN':([10,],[24,]),'LOGICAL_AND':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,36,-12,-13,-14,-15,-16,-17,]),'LOGICAL_OR':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,37,-12,-13,-14,-15,-16,-17,]),'EQUAL_EQUAL':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,38,-12,-13,-14,-15,-16,-17,]),'NOT_EQUAL':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,39,-12,-13,-14,-15,-16,-17,]),'GREATER_THAN':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,40,-12,-13,-14,-15,-16,-17,]),'LESS_THAN':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,41,-12,-13,-14,-15,-16,-17,]),'GREATER_EQUAL':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,42,-12,-13,-14,-15,-16,-17,]),'LESS_EQUAL':([11,12,13,23,26,27,28,29,30,31,32,],[-18,-19,-20,-21,43,-12,-13,-14,-15,-16,-17,]),'GETS':([24,],[33,]),'DOT':([33,],[44,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[1,]),'print':([0,],[2,]),'input':([0,],[3,]),'assignment':([0,],[4,]),'expression':([0,6,11,12,13,14,15,16,19,],[5,17,20,21,22,23,24,25,27,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,25,46,],[2,35,56,]),'statement':([0,2,25,35,46,56,],[3,15,3,15,3,15,]),'print':([0,2,25,35,46,56,],[4,4,4,4,4,4,]),'input':([0,2,25,35,46,56,],[5,5,5,5,5,5,]),'assignment':([0,2,25,35,46,56,],[6,6,6,6,6,6,]),'expression':([0,2,9,14,16,17,18,19,20,21,24,25,35,36,37,38,39,40,41,42,43,46,56,],[7,7,22,26,27,28,29,30,31,32,34,7,7,47,48,49,50,51,52,53,54,7,7,]),'if_statement':([0,2,25,35,46,56,],[8,8,8,8,8,8,]),'condition':([14,],[25,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,24 +26,36 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> statement","S'",1,None,None,None),
-  ('statement -> print','statement',1,'p_statement','sintactico.py',14),
-  ('statement -> input','statement',1,'p_statement','sintactico.py',15),
-  ('statement -> assignment','statement',1,'p_statement','sintactico.py',16),
-  ('statement -> expression','statement',1,'p_statement','sintactico.py',17),
-  ('print -> PUTS expression','print',2,'p_print','sintactico.py',21),
-  ('input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER','input',5,'p_input','sintactico.py',25),
-  ('assignment -> IDENTIFIER ASSIGN expression','assignment',3,'p_assignment','sintactico.py',29),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','sintactico.py',33),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','sintactico.py',34),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','sintactico.py',35),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','sintactico.py',36),
-  ('expression -> expression POWER expression','expression',3,'p_expression_binop','sintactico.py',37),
-  ('expression -> expression MODULO expression','expression',3,'p_expression_binop','sintactico.py',38),
-  ('expression -> INTEGER','expression',1,'p_expression_number','sintactico.py',42),
-  ('expression -> FLOAT','expression',1,'p_expression_number','sintactico.py',43),
-  ('expression -> STRING','expression',1,'p_expression_string','sintactico.py',47),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','sintactico.py',51),
-  ('condition -> expression LOGICAL_AND expression','condition',3,'p_condition_logical','sintactico.py',55),
-  ('condition -> expression LOGICAL_OR expression','condition',3,'p_condition_logical','sintactico.py',56),
+  ("S' -> program","S'",1,None,None,None),
+  ('program -> statement_list','program',1,'p_program','sintactico.py',18),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','sintactico.py',23),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','sintactico.py',24),
+  ('statement -> print','statement',1,'p_statement','sintactico.py',36),
+  ('statement -> input','statement',1,'p_statement','sintactico.py',37),
+  ('statement -> assignment','statement',1,'p_statement','sintactico.py',38),
+  ('statement -> expression','statement',1,'p_statement','sintactico.py',39),
+  ('statement -> if_statement','statement',1,'p_statement','sintactico.py',40),
+  ('print -> PUTS expression','print',2,'p_print','sintactico.py',44),
+  ('input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER','input',5,'p_input','sintactico.py',48),
+  ('assignment -> IDENTIFIER ASSIGN expression','assignment',3,'p_assignment','sintactico.py',52),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','sintactico.py',56),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','sintactico.py',57),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','sintactico.py',58),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','sintactico.py',59),
+  ('expression -> expression POWER expression','expression',3,'p_expression_binop','sintactico.py',60),
+  ('expression -> expression MODULO expression','expression',3,'p_expression_binop','sintactico.py',61),
+  ('expression -> INTEGER','expression',1,'p_expression_number','sintactico.py',65),
+  ('expression -> FLOAT','expression',1,'p_expression_number','sintactico.py',66),
+  ('expression -> STRING','expression',1,'p_expression_string','sintactico.py',70),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','sintactico.py',74),
+  ('condition -> expression LOGICAL_AND expression','condition',3,'p_condition_logical','sintactico.py',78),
+  ('condition -> expression LOGICAL_OR expression','condition',3,'p_condition_logical','sintactico.py',79),
+  ('condition -> expression EQUAL_EQUAL expression','condition',3,'p_condition_comparison','sintactico.py',85),
+  ('condition -> expression NOT_EQUAL expression','condition',3,'p_condition_comparison','sintactico.py',86),
+  ('condition -> expression GREATER_THAN expression','condition',3,'p_condition_comparison','sintactico.py',87),
+  ('condition -> expression LESS_THAN expression','condition',3,'p_condition_comparison','sintactico.py',88),
+  ('condition -> expression GREATER_EQUAL expression','condition',3,'p_condition_comparison','sintactico.py',89),
+  ('condition -> expression LESS_EQUAL expression','condition',3,'p_condition_comparison','sintactico.py',90),
+  ('if_statement -> IF condition statement_list END_KW','if_statement',4,'p_if_statement','sintactico.py',95),
+  ('if_statement -> IF condition statement_list ELSE statement_list END_KW','if_statement',6,'p_if_statement','sintactico.py',96),
 ]

@@ -5,7 +5,7 @@ Unused terminals:
     ALIAS
     AND
     AND_ASSIGN
-    BEGIN
+    BEGIN_KW
     BREAK
     CASE
     CLASS
@@ -16,23 +16,15 @@ Unused terminals:
     DEFINEDQ
     DIVIDE_ASSIGN
     DO
-    ELSE
     ELSIF
-    END
     ENSURE
-    EQUAL_EQUAL
     FALSE
     FOR
     GLOBAL_VAR
-    GREATER_EQUAL
-    GREATER_THAN
-    IF
     IN
     INSTANCE_VAR
     LBRACE
     LBRACKET
-    LESS_EQUAL
-    LESS_THAN
     LOGICAL_NOT
     LPAREN
     MATCH_REGEX
@@ -41,7 +33,6 @@ Unused terminals:
     NEXT
     NIL
     NOT
-    NOT_EQUAL
     NOT_MATCH_REGEX
     OR
     OR_ASSIGN
@@ -70,34 +61,46 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> statement
-Rule 1     statement -> print
-Rule 2     statement -> input
-Rule 3     statement -> assignment
-Rule 4     statement -> expression
-Rule 5     print -> PUTS expression
-Rule 6     input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER
-Rule 7     assignment -> IDENTIFIER ASSIGN expression
-Rule 8     expression -> expression PLUS expression
-Rule 9     expression -> expression MINUS expression
-Rule 10    expression -> expression TIMES expression
-Rule 11    expression -> expression DIVIDE expression
-Rule 12    expression -> expression POWER expression
-Rule 13    expression -> expression MODULO expression
-Rule 14    expression -> INTEGER
-Rule 15    expression -> FLOAT
-Rule 16    expression -> STRING
-Rule 17    expression -> IDENTIFIER
-Rule 18    condition -> expression LOGICAL_AND expression
-Rule 19    condition -> expression LOGICAL_OR expression
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> print
+Rule 5     statement -> input
+Rule 6     statement -> assignment
+Rule 7     statement -> expression
+Rule 8     statement -> if_statement
+Rule 9     print -> PUTS expression
+Rule 10    input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+Rule 11    assignment -> IDENTIFIER ASSIGN expression
+Rule 12    expression -> expression PLUS expression
+Rule 13    expression -> expression MINUS expression
+Rule 14    expression -> expression TIMES expression
+Rule 15    expression -> expression DIVIDE expression
+Rule 16    expression -> expression POWER expression
+Rule 17    expression -> expression MODULO expression
+Rule 18    expression -> INTEGER
+Rule 19    expression -> FLOAT
+Rule 20    expression -> STRING
+Rule 21    expression -> IDENTIFIER
+Rule 22    condition -> expression LOGICAL_AND expression
+Rule 23    condition -> expression LOGICAL_OR expression
+Rule 24    condition -> expression EQUAL_EQUAL expression
+Rule 25    condition -> expression NOT_EQUAL expression
+Rule 26    condition -> expression GREATER_THAN expression
+Rule 27    condition -> expression LESS_THAN expression
+Rule 28    condition -> expression GREATER_EQUAL expression
+Rule 29    condition -> expression LESS_EQUAL expression
+Rule 30    if_statement -> IF condition statement_list END_KW
+Rule 31    if_statement -> IF condition statement_list ELSE statement_list END_KW
 
 Terminals, with rules where they appear
 
 ALIAS                : 
 AND                  : 
 AND_ASSIGN           : 
-ASSIGN               : 6 7
-BEGIN                : 
+ASSIGN               : 10 11
+BEGIN_KW             : 
 BREAK                : 
 CASE                 : 
 CLASS                : 
@@ -106,51 +109,51 @@ COMMA                :
 CONSTANT             : 
 DEF                  : 
 DEFINEDQ             : 
-DIVIDE               : 11
+DIVIDE               : 15
 DIVIDE_ASSIGN        : 
 DO                   : 
-DOT                  : 6
-ELSE                 : 
+DOT                  : 10
+ELSE                 : 31
 ELSIF                : 
-END                  : 
+END_KW               : 30 31
 ENSURE               : 
-EQUAL_EQUAL          : 
+EQUAL_EQUAL          : 24
 FALSE                : 
-FLOAT                : 15
+FLOAT                : 19
 FOR                  : 
-GETS                 : 6
+GETS                 : 10
 GLOBAL_VAR           : 
-GREATER_EQUAL        : 
-GREATER_THAN         : 
-IDENTIFIER           : 6 6 7 17
-IF                   : 
+GREATER_EQUAL        : 28
+GREATER_THAN         : 26
+IDENTIFIER           : 10 10 11 21
+IF                   : 30 31
 IN                   : 
 INSTANCE_VAR         : 
-INTEGER              : 14
+INTEGER              : 18
 LBRACE               : 
 LBRACKET             : 
-LESS_EQUAL           : 
-LESS_THAN            : 
-LOGICAL_AND          : 18
+LESS_EQUAL           : 29
+LESS_THAN            : 27
+LOGICAL_AND          : 22
 LOGICAL_NOT          : 
-LOGICAL_OR           : 19
+LOGICAL_OR           : 23
 LPAREN               : 
 MATCH_REGEX          : 
-MINUS                : 9
+MINUS                : 13
 MINUS_ASSIGN         : 
 MODULE               : 
-MODULO               : 13
+MODULO               : 17
 NEXT                 : 
 NIL                  : 
 NOT                  : 
-NOT_EQUAL            : 
+NOT_EQUAL            : 25
 NOT_MATCH_REGEX      : 
 OR                   : 
 OR_ASSIGN            : 
-PLUS                 : 8
+PLUS                 : 12
 PLUS_ASSIGN          : 
-POWER                : 12
-PUTS                 : 5
+POWER                : 16
+PUTS                 : 9
 RANGE_EXCLUSIVE      : 
 RANGE_INCLUSIVE      : 
 RBRACE               : 
@@ -162,10 +165,10 @@ RETURN               :
 RPAREN               : 
 SELF                 : 
 SEMICOLON            : 
-STRING               : 16
+STRING               : 20
 SUPER                : 
 THEN                 : 
-TIMES                : 10
+TIMES                : 14
 TIMES_ASSIGN         : 
 TRUE                 : 
 UNDEF                : 
@@ -178,618 +181,1559 @@ error                :
 
 Nonterminals, with rules where they appear
 
-assignment           : 3
-condition            : 
-expression           : 4 5 7 8 8 9 9 10 10 11 11 12 12 13 13 18 18 19 19
-input                : 2
-print                : 1
-statement            : 0
+assignment           : 6
+condition            : 30 31
+expression           : 7 9 11 12 12 13 13 14 14 15 15 16 16 17 17 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29
+if_statement         : 8
+input                : 5
+print                : 4
+program              : 0
+statement            : 2 3
+statement_list       : 1 2 30 31 31
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . statement
-    (1) statement -> . print
-    (2) statement -> . input
-    (3) statement -> . assignment
-    (4) statement -> . expression
-    (5) print -> . PUTS expression
-    (6) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
-    (7) assignment -> . IDENTIFIER ASSIGN expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
 
-    PUTS            shift and go to state 6
-    IDENTIFIER      shift and go to state 7
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
 
-    statement                      shift and go to state 1
-    print                          shift and go to state 2
-    input                          shift and go to state 3
-    assignment                     shift and go to state 4
-    expression                     shift and go to state 5
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
 
 state 1
 
-    (0) S' -> statement .
+    (0) S' -> program .
 
 
 
 state 2
 
-    (1) statement -> print .
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
 
-    $end            reduce using rule 1 (statement -> print .)
+    $end            reduce using rule 1 (program -> statement_list .)
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
 
+    statement                      shift and go to state 15
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
 
 state 3
 
-    (2) statement -> input .
+    (3) statement_list -> statement .
 
-    $end            reduce using rule 2 (statement -> input .)
+    PUTS            reduce using rule 3 (statement_list -> statement .)
+    IDENTIFIER      reduce using rule 3 (statement_list -> statement .)
+    INTEGER         reduce using rule 3 (statement_list -> statement .)
+    FLOAT           reduce using rule 3 (statement_list -> statement .)
+    STRING          reduce using rule 3 (statement_list -> statement .)
+    IF              reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+    END_KW          reduce using rule 3 (statement_list -> statement .)
+    ELSE            reduce using rule 3 (statement_list -> statement .)
 
 
 state 4
 
-    (3) statement -> assignment .
+    (4) statement -> print .
 
-    $end            reduce using rule 3 (statement -> assignment .)
+    PUTS            reduce using rule 4 (statement -> print .)
+    IDENTIFIER      reduce using rule 4 (statement -> print .)
+    INTEGER         reduce using rule 4 (statement -> print .)
+    FLOAT           reduce using rule 4 (statement -> print .)
+    STRING          reduce using rule 4 (statement -> print .)
+    IF              reduce using rule 4 (statement -> print .)
+    $end            reduce using rule 4 (statement -> print .)
+    END_KW          reduce using rule 4 (statement -> print .)
+    ELSE            reduce using rule 4 (statement -> print .)
 
 
 state 5
 
-    (4) statement -> expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (5) statement -> input .
 
-    $end            reduce using rule 4 (statement -> expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+    PUTS            reduce using rule 5 (statement -> input .)
+    IDENTIFIER      reduce using rule 5 (statement -> input .)
+    INTEGER         reduce using rule 5 (statement -> input .)
+    FLOAT           reduce using rule 5 (statement -> input .)
+    STRING          reduce using rule 5 (statement -> input .)
+    IF              reduce using rule 5 (statement -> input .)
+    $end            reduce using rule 5 (statement -> input .)
+    END_KW          reduce using rule 5 (statement -> input .)
+    ELSE            reduce using rule 5 (statement -> input .)
 
 
 state 6
 
-    (5) print -> PUTS . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (6) statement -> assignment .
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    PUTS            reduce using rule 6 (statement -> assignment .)
+    IDENTIFIER      reduce using rule 6 (statement -> assignment .)
+    INTEGER         reduce using rule 6 (statement -> assignment .)
+    FLOAT           reduce using rule 6 (statement -> assignment .)
+    STRING          reduce using rule 6 (statement -> assignment .)
+    IF              reduce using rule 6 (statement -> assignment .)
+    $end            reduce using rule 6 (statement -> assignment .)
+    END_KW          reduce using rule 6 (statement -> assignment .)
+    ELSE            reduce using rule 6 (statement -> assignment .)
 
-    expression                     shift and go to state 17
 
 state 7
 
-    (6) input -> IDENTIFIER . ASSIGN GETS DOT IDENTIFIER
-    (7) assignment -> IDENTIFIER . ASSIGN expression
-    (17) expression -> IDENTIFIER .
+    (7) statement -> expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-    ASSIGN          shift and go to state 19
-    PLUS            reduce using rule 17 (expression -> IDENTIFIER .)
-    MINUS           reduce using rule 17 (expression -> IDENTIFIER .)
-    TIMES           reduce using rule 17 (expression -> IDENTIFIER .)
-    DIVIDE          reduce using rule 17 (expression -> IDENTIFIER .)
-    POWER           reduce using rule 17 (expression -> IDENTIFIER .)
-    MODULO          reduce using rule 17 (expression -> IDENTIFIER .)
-    $end            reduce using rule 17 (expression -> IDENTIFIER .)
+    PUTS            reduce using rule 7 (statement -> expression .)
+    IDENTIFIER      reduce using rule 7 (statement -> expression .)
+    INTEGER         reduce using rule 7 (statement -> expression .)
+    FLOAT           reduce using rule 7 (statement -> expression .)
+    STRING          reduce using rule 7 (statement -> expression .)
+    IF              reduce using rule 7 (statement -> expression .)
+    $end            reduce using rule 7 (statement -> expression .)
+    END_KW          reduce using rule 7 (statement -> expression .)
+    ELSE            reduce using rule 7 (statement -> expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
 
 
 state 8
 
-    (14) expression -> INTEGER .
+    (8) statement -> if_statement .
 
-    PLUS            reduce using rule 14 (expression -> INTEGER .)
-    MINUS           reduce using rule 14 (expression -> INTEGER .)
-    TIMES           reduce using rule 14 (expression -> INTEGER .)
-    DIVIDE          reduce using rule 14 (expression -> INTEGER .)
-    POWER           reduce using rule 14 (expression -> INTEGER .)
-    MODULO          reduce using rule 14 (expression -> INTEGER .)
-    $end            reduce using rule 14 (expression -> INTEGER .)
+    PUTS            reduce using rule 8 (statement -> if_statement .)
+    IDENTIFIER      reduce using rule 8 (statement -> if_statement .)
+    INTEGER         reduce using rule 8 (statement -> if_statement .)
+    FLOAT           reduce using rule 8 (statement -> if_statement .)
+    STRING          reduce using rule 8 (statement -> if_statement .)
+    IF              reduce using rule 8 (statement -> if_statement .)
+    $end            reduce using rule 8 (statement -> if_statement .)
+    END_KW          reduce using rule 8 (statement -> if_statement .)
+    ELSE            reduce using rule 8 (statement -> if_statement .)
 
 
 state 9
 
-    (15) expression -> FLOAT .
+    (9) print -> PUTS . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-    PLUS            reduce using rule 15 (expression -> FLOAT .)
-    MINUS           reduce using rule 15 (expression -> FLOAT .)
-    TIMES           reduce using rule 15 (expression -> FLOAT .)
-    DIVIDE          reduce using rule 15 (expression -> FLOAT .)
-    POWER           reduce using rule 15 (expression -> FLOAT .)
-    MODULO          reduce using rule 15 (expression -> FLOAT .)
-    $end            reduce using rule 15 (expression -> FLOAT .)
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
+    expression                     shift and go to state 22
 
 state 10
 
-    (16) expression -> STRING .
+    (10) input -> IDENTIFIER . ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> IDENTIFIER . ASSIGN expression
+    (21) expression -> IDENTIFIER .
 
-    PLUS            reduce using rule 16 (expression -> STRING .)
-    MINUS           reduce using rule 16 (expression -> STRING .)
-    TIMES           reduce using rule 16 (expression -> STRING .)
-    DIVIDE          reduce using rule 16 (expression -> STRING .)
-    POWER           reduce using rule 16 (expression -> STRING .)
-    MODULO          reduce using rule 16 (expression -> STRING .)
-    $end            reduce using rule 16 (expression -> STRING .)
+    ASSIGN          shift and go to state 24
+    PLUS            reduce using rule 21 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 21 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 21 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 21 (expression -> IDENTIFIER .)
+    POWER           reduce using rule 21 (expression -> IDENTIFIER .)
+    MODULO          reduce using rule 21 (expression -> IDENTIFIER .)
+    PUTS            reduce using rule 21 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 21 (expression -> IDENTIFIER .)
+    INTEGER         reduce using rule 21 (expression -> IDENTIFIER .)
+    FLOAT           reduce using rule 21 (expression -> IDENTIFIER .)
+    STRING          reduce using rule 21 (expression -> IDENTIFIER .)
+    IF              reduce using rule 21 (expression -> IDENTIFIER .)
+    $end            reduce using rule 21 (expression -> IDENTIFIER .)
+    END_KW          reduce using rule 21 (expression -> IDENTIFIER .)
+    ELSE            reduce using rule 21 (expression -> IDENTIFIER .)
 
 
 state 11
 
-    (8) expression -> expression PLUS . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (18) expression -> INTEGER .
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    PLUS            reduce using rule 18 (expression -> INTEGER .)
+    MINUS           reduce using rule 18 (expression -> INTEGER .)
+    TIMES           reduce using rule 18 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 18 (expression -> INTEGER .)
+    POWER           reduce using rule 18 (expression -> INTEGER .)
+    MODULO          reduce using rule 18 (expression -> INTEGER .)
+    PUTS            reduce using rule 18 (expression -> INTEGER .)
+    IDENTIFIER      reduce using rule 18 (expression -> INTEGER .)
+    INTEGER         reduce using rule 18 (expression -> INTEGER .)
+    FLOAT           reduce using rule 18 (expression -> INTEGER .)
+    STRING          reduce using rule 18 (expression -> INTEGER .)
+    IF              reduce using rule 18 (expression -> INTEGER .)
+    $end            reduce using rule 18 (expression -> INTEGER .)
+    END_KW          reduce using rule 18 (expression -> INTEGER .)
+    ELSE            reduce using rule 18 (expression -> INTEGER .)
+    LOGICAL_AND     reduce using rule 18 (expression -> INTEGER .)
+    LOGICAL_OR      reduce using rule 18 (expression -> INTEGER .)
+    EQUAL_EQUAL     reduce using rule 18 (expression -> INTEGER .)
+    NOT_EQUAL       reduce using rule 18 (expression -> INTEGER .)
+    GREATER_THAN    reduce using rule 18 (expression -> INTEGER .)
+    LESS_THAN       reduce using rule 18 (expression -> INTEGER .)
+    GREATER_EQUAL   reduce using rule 18 (expression -> INTEGER .)
+    LESS_EQUAL      reduce using rule 18 (expression -> INTEGER .)
 
-    expression                     shift and go to state 20
 
 state 12
 
-    (9) expression -> expression MINUS . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (19) expression -> FLOAT .
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    PLUS            reduce using rule 19 (expression -> FLOAT .)
+    MINUS           reduce using rule 19 (expression -> FLOAT .)
+    TIMES           reduce using rule 19 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 19 (expression -> FLOAT .)
+    POWER           reduce using rule 19 (expression -> FLOAT .)
+    MODULO          reduce using rule 19 (expression -> FLOAT .)
+    PUTS            reduce using rule 19 (expression -> FLOAT .)
+    IDENTIFIER      reduce using rule 19 (expression -> FLOAT .)
+    INTEGER         reduce using rule 19 (expression -> FLOAT .)
+    FLOAT           reduce using rule 19 (expression -> FLOAT .)
+    STRING          reduce using rule 19 (expression -> FLOAT .)
+    IF              reduce using rule 19 (expression -> FLOAT .)
+    $end            reduce using rule 19 (expression -> FLOAT .)
+    END_KW          reduce using rule 19 (expression -> FLOAT .)
+    ELSE            reduce using rule 19 (expression -> FLOAT .)
+    LOGICAL_AND     reduce using rule 19 (expression -> FLOAT .)
+    LOGICAL_OR      reduce using rule 19 (expression -> FLOAT .)
+    EQUAL_EQUAL     reduce using rule 19 (expression -> FLOAT .)
+    NOT_EQUAL       reduce using rule 19 (expression -> FLOAT .)
+    GREATER_THAN    reduce using rule 19 (expression -> FLOAT .)
+    LESS_THAN       reduce using rule 19 (expression -> FLOAT .)
+    GREATER_EQUAL   reduce using rule 19 (expression -> FLOAT .)
+    LESS_EQUAL      reduce using rule 19 (expression -> FLOAT .)
 
-    expression                     shift and go to state 21
 
 state 13
 
-    (10) expression -> expression TIMES . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (20) expression -> STRING .
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    PLUS            reduce using rule 20 (expression -> STRING .)
+    MINUS           reduce using rule 20 (expression -> STRING .)
+    TIMES           reduce using rule 20 (expression -> STRING .)
+    DIVIDE          reduce using rule 20 (expression -> STRING .)
+    POWER           reduce using rule 20 (expression -> STRING .)
+    MODULO          reduce using rule 20 (expression -> STRING .)
+    PUTS            reduce using rule 20 (expression -> STRING .)
+    IDENTIFIER      reduce using rule 20 (expression -> STRING .)
+    INTEGER         reduce using rule 20 (expression -> STRING .)
+    FLOAT           reduce using rule 20 (expression -> STRING .)
+    STRING          reduce using rule 20 (expression -> STRING .)
+    IF              reduce using rule 20 (expression -> STRING .)
+    $end            reduce using rule 20 (expression -> STRING .)
+    END_KW          reduce using rule 20 (expression -> STRING .)
+    ELSE            reduce using rule 20 (expression -> STRING .)
+    LOGICAL_AND     reduce using rule 20 (expression -> STRING .)
+    LOGICAL_OR      reduce using rule 20 (expression -> STRING .)
+    EQUAL_EQUAL     reduce using rule 20 (expression -> STRING .)
+    NOT_EQUAL       reduce using rule 20 (expression -> STRING .)
+    GREATER_THAN    reduce using rule 20 (expression -> STRING .)
+    LESS_THAN       reduce using rule 20 (expression -> STRING .)
+    GREATER_EQUAL   reduce using rule 20 (expression -> STRING .)
+    LESS_EQUAL      reduce using rule 20 (expression -> STRING .)
 
-    expression                     shift and go to state 22
 
 state 14
 
-    (11) expression -> expression DIVIDE . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (30) if_statement -> IF . condition statement_list END_KW
+    (31) if_statement -> IF . condition statement_list ELSE statement_list END_KW
+    (22) condition -> . expression LOGICAL_AND expression
+    (23) condition -> . expression LOGICAL_OR expression
+    (24) condition -> . expression EQUAL_EQUAL expression
+    (25) condition -> . expression NOT_EQUAL expression
+    (26) condition -> . expression GREATER_THAN expression
+    (27) condition -> . expression LESS_THAN expression
+    (28) condition -> . expression GREATER_EQUAL expression
+    (29) condition -> . expression LESS_EQUAL expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
-    expression                     shift and go to state 23
+    condition                      shift and go to state 25
+    expression                     shift and go to state 26
 
 state 15
 
-    (12) expression -> expression POWER . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (2) statement_list -> statement_list statement .
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    PUTS            reduce using rule 2 (statement_list -> statement_list statement .)
+    IDENTIFIER      reduce using rule 2 (statement_list -> statement_list statement .)
+    INTEGER         reduce using rule 2 (statement_list -> statement_list statement .)
+    FLOAT           reduce using rule 2 (statement_list -> statement_list statement .)
+    STRING          reduce using rule 2 (statement_list -> statement_list statement .)
+    IF              reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+    END_KW          reduce using rule 2 (statement_list -> statement_list statement .)
+    ELSE            reduce using rule 2 (statement_list -> statement_list statement .)
 
-    expression                     shift and go to state 24
 
 state 16
 
-    (13) expression -> expression MODULO . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
+    (12) expression -> expression PLUS . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
-
-    expression                     shift and go to state 25
-
-state 17
-
-    (5) print -> PUTS expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
-
-    $end            reduce using rule 5 (print -> PUTS expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
-
-
-state 18
-
-    (17) expression -> IDENTIFIER .
-
-    PLUS            reduce using rule 17 (expression -> IDENTIFIER .)
-    MINUS           reduce using rule 17 (expression -> IDENTIFIER .)
-    TIMES           reduce using rule 17 (expression -> IDENTIFIER .)
-    DIVIDE          reduce using rule 17 (expression -> IDENTIFIER .)
-    POWER           reduce using rule 17 (expression -> IDENTIFIER .)
-    MODULO          reduce using rule 17 (expression -> IDENTIFIER .)
-    $end            reduce using rule 17 (expression -> IDENTIFIER .)
-
-
-state 19
-
-    (6) input -> IDENTIFIER ASSIGN . GETS DOT IDENTIFIER
-    (7) assignment -> IDENTIFIER ASSIGN . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression POWER expression
-    (13) expression -> . expression MODULO expression
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . IDENTIFIER
-
-    GETS            shift and go to state 26
-    INTEGER         shift and go to state 8
-    FLOAT           shift and go to state 9
-    STRING          shift and go to state 10
-    IDENTIFIER      shift and go to state 18
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
     expression                     shift and go to state 27
 
+state 17
+
+    (13) expression -> expression MINUS . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 28
+
+state 18
+
+    (14) expression -> expression TIMES . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 29
+
+state 19
+
+    (15) expression -> expression DIVIDE . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 30
+
 state 20
 
-    (8) expression -> expression PLUS expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (16) expression -> expression POWER . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 8 (expression -> expression PLUS expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
-  ! PLUS            [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! MINUS           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! TIMES           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! POWER           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! MODULO          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-
+    expression                     shift and go to state 31
 
 state 21
 
-    (9) expression -> expression MINUS expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (17) expression -> expression MODULO . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 9 (expression -> expression MINUS expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
-  ! PLUS            [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! MINUS           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! TIMES           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! POWER           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! MODULO          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-
+    expression                     shift and go to state 32
 
 state 22
 
-    (10) expression -> expression TIMES expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (9) print -> PUTS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 10 (expression -> expression TIMES expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
-
-  ! PLUS            [ reduce using rule 10 (expression -> expression TIMES expression .) ]
-  ! MINUS           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
-  ! TIMES           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
-  ! DIVIDE          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
-  ! POWER           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
-  ! MODULO          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+    PUTS            reduce using rule 9 (print -> PUTS expression .)
+    IDENTIFIER      reduce using rule 9 (print -> PUTS expression .)
+    INTEGER         reduce using rule 9 (print -> PUTS expression .)
+    FLOAT           reduce using rule 9 (print -> PUTS expression .)
+    STRING          reduce using rule 9 (print -> PUTS expression .)
+    IF              reduce using rule 9 (print -> PUTS expression .)
+    $end            reduce using rule 9 (print -> PUTS expression .)
+    END_KW          reduce using rule 9 (print -> PUTS expression .)
+    ELSE            reduce using rule 9 (print -> PUTS expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
 
 
 state 23
 
-    (11) expression -> expression DIVIDE expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (21) expression -> IDENTIFIER .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 11 (expression -> expression DIVIDE expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
-
-  ! PLUS            [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
-  ! MINUS           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
-  ! TIMES           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
-  ! DIVIDE          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
-  ! POWER           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
-  ! MODULO          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+    PLUS            reduce using rule 21 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 21 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 21 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 21 (expression -> IDENTIFIER .)
+    POWER           reduce using rule 21 (expression -> IDENTIFIER .)
+    MODULO          reduce using rule 21 (expression -> IDENTIFIER .)
+    PUTS            reduce using rule 21 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 21 (expression -> IDENTIFIER .)
+    INTEGER         reduce using rule 21 (expression -> IDENTIFIER .)
+    FLOAT           reduce using rule 21 (expression -> IDENTIFIER .)
+    STRING          reduce using rule 21 (expression -> IDENTIFIER .)
+    IF              reduce using rule 21 (expression -> IDENTIFIER .)
+    $end            reduce using rule 21 (expression -> IDENTIFIER .)
+    END_KW          reduce using rule 21 (expression -> IDENTIFIER .)
+    ELSE            reduce using rule 21 (expression -> IDENTIFIER .)
+    LOGICAL_AND     reduce using rule 21 (expression -> IDENTIFIER .)
+    LOGICAL_OR      reduce using rule 21 (expression -> IDENTIFIER .)
+    EQUAL_EQUAL     reduce using rule 21 (expression -> IDENTIFIER .)
+    NOT_EQUAL       reduce using rule 21 (expression -> IDENTIFIER .)
+    GREATER_THAN    reduce using rule 21 (expression -> IDENTIFIER .)
+    LESS_THAN       reduce using rule 21 (expression -> IDENTIFIER .)
+    GREATER_EQUAL   reduce using rule 21 (expression -> IDENTIFIER .)
+    LESS_EQUAL      reduce using rule 21 (expression -> IDENTIFIER .)
 
 
 state 24
 
-    (12) expression -> expression POWER expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (10) input -> IDENTIFIER ASSIGN . GETS DOT IDENTIFIER
+    (11) assignment -> IDENTIFIER ASSIGN . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 12 (expression -> expression POWER expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+    GETS            shift and go to state 33
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
 
-  ! PLUS            [ reduce using rule 12 (expression -> expression POWER expression .) ]
-  ! MINUS           [ reduce using rule 12 (expression -> expression POWER expression .) ]
-  ! TIMES           [ reduce using rule 12 (expression -> expression POWER expression .) ]
-  ! DIVIDE          [ reduce using rule 12 (expression -> expression POWER expression .) ]
-  ! POWER           [ reduce using rule 12 (expression -> expression POWER expression .) ]
-  ! MODULO          [ reduce using rule 12 (expression -> expression POWER expression .) ]
-
+    expression                     shift and go to state 34
 
 state 25
 
-    (13) expression -> expression MODULO expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (30) if_statement -> IF condition . statement_list END_KW
+    (31) if_statement -> IF condition . statement_list ELSE statement_list END_KW
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for POWER resolved as shift
-  ! shift/reduce conflict for MODULO resolved as shift
-    $end            reduce using rule 13 (expression -> expression MODULO expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
 
-  ! PLUS            [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-  ! MINUS           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-  ! TIMES           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-  ! DIVIDE          [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-  ! POWER           [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-  ! MODULO          [ reduce using rule 13 (expression -> expression MODULO expression .) ]
-
+    statement_list                 shift and go to state 35
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
 
 state 26
 
-    (6) input -> IDENTIFIER ASSIGN GETS . DOT IDENTIFIER
+    (22) condition -> expression . LOGICAL_AND expression
+    (23) condition -> expression . LOGICAL_OR expression
+    (24) condition -> expression . EQUAL_EQUAL expression
+    (25) condition -> expression . NOT_EQUAL expression
+    (26) condition -> expression . GREATER_THAN expression
+    (27) condition -> expression . LESS_THAN expression
+    (28) condition -> expression . GREATER_EQUAL expression
+    (29) condition -> expression . LESS_EQUAL expression
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-    DOT             shift and go to state 28
+    LOGICAL_AND     shift and go to state 36
+    LOGICAL_OR      shift and go to state 37
+    EQUAL_EQUAL     shift and go to state 38
+    NOT_EQUAL       shift and go to state 39
+    GREATER_THAN    shift and go to state 40
+    LESS_THAN       shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+    LESS_EQUAL      shift and go to state 43
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
 
 
 state 27
 
-    (7) assignment -> IDENTIFIER ASSIGN expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . POWER expression
-    (13) expression -> expression . MODULO expression
+    (12) expression -> expression PLUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-    $end            reduce using rule 7 (assignment -> IDENTIFIER ASSIGN expression .)
-    PLUS            shift and go to state 11
-    MINUS           shift and go to state 12
-    TIMES           shift and go to state 13
-    DIVIDE          shift and go to state 14
-    POWER           shift and go to state 15
-    MODULO          shift and go to state 16
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 12 (expression -> expression PLUS expression .)
+    IDENTIFIER      reduce using rule 12 (expression -> expression PLUS expression .)
+    INTEGER         reduce using rule 12 (expression -> expression PLUS expression .)
+    FLOAT           reduce using rule 12 (expression -> expression PLUS expression .)
+    STRING          reduce using rule 12 (expression -> expression PLUS expression .)
+    IF              reduce using rule 12 (expression -> expression PLUS expression .)
+    $end            reduce using rule 12 (expression -> expression PLUS expression .)
+    END_KW          reduce using rule 12 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 12 (expression -> expression PLUS expression .)
+    LOGICAL_AND     reduce using rule 12 (expression -> expression PLUS expression .)
+    LOGICAL_OR      reduce using rule 12 (expression -> expression PLUS expression .)
+    EQUAL_EQUAL     reduce using rule 12 (expression -> expression PLUS expression .)
+    NOT_EQUAL       reduce using rule 12 (expression -> expression PLUS expression .)
+    GREATER_THAN    reduce using rule 12 (expression -> expression PLUS expression .)
+    LESS_THAN       reduce using rule 12 (expression -> expression PLUS expression .)
+    GREATER_EQUAL   reduce using rule 12 (expression -> expression PLUS expression .)
+    LESS_EQUAL      reduce using rule 12 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! POWER           [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 12 (expression -> expression PLUS expression .) ]
 
 
 state 28
 
-    (6) input -> IDENTIFIER ASSIGN GETS DOT . IDENTIFIER
+    (13) expression -> expression MINUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-    IDENTIFIER      shift and go to state 29
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 13 (expression -> expression MINUS expression .)
+    IDENTIFIER      reduce using rule 13 (expression -> expression MINUS expression .)
+    INTEGER         reduce using rule 13 (expression -> expression MINUS expression .)
+    FLOAT           reduce using rule 13 (expression -> expression MINUS expression .)
+    STRING          reduce using rule 13 (expression -> expression MINUS expression .)
+    IF              reduce using rule 13 (expression -> expression MINUS expression .)
+    $end            reduce using rule 13 (expression -> expression MINUS expression .)
+    END_KW          reduce using rule 13 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 13 (expression -> expression MINUS expression .)
+    LOGICAL_AND     reduce using rule 13 (expression -> expression MINUS expression .)
+    LOGICAL_OR      reduce using rule 13 (expression -> expression MINUS expression .)
+    EQUAL_EQUAL     reduce using rule 13 (expression -> expression MINUS expression .)
+    NOT_EQUAL       reduce using rule 13 (expression -> expression MINUS expression .)
+    GREATER_THAN    reduce using rule 13 (expression -> expression MINUS expression .)
+    LESS_THAN       reduce using rule 13 (expression -> expression MINUS expression .)
+    GREATER_EQUAL   reduce using rule 13 (expression -> expression MINUS expression .)
+    LESS_EQUAL      reduce using rule 13 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! POWER           [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 13 (expression -> expression MINUS expression .) ]
 
 
 state 29
 
-    (6) input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .
+    (14) expression -> expression TIMES expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
 
-    $end            reduce using rule 6 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 14 (expression -> expression TIMES expression .)
+    IDENTIFIER      reduce using rule 14 (expression -> expression TIMES expression .)
+    INTEGER         reduce using rule 14 (expression -> expression TIMES expression .)
+    FLOAT           reduce using rule 14 (expression -> expression TIMES expression .)
+    STRING          reduce using rule 14 (expression -> expression TIMES expression .)
+    IF              reduce using rule 14 (expression -> expression TIMES expression .)
+    $end            reduce using rule 14 (expression -> expression TIMES expression .)
+    END_KW          reduce using rule 14 (expression -> expression TIMES expression .)
+    ELSE            reduce using rule 14 (expression -> expression TIMES expression .)
+    LOGICAL_AND     reduce using rule 14 (expression -> expression TIMES expression .)
+    LOGICAL_OR      reduce using rule 14 (expression -> expression TIMES expression .)
+    EQUAL_EQUAL     reduce using rule 14 (expression -> expression TIMES expression .)
+    NOT_EQUAL       reduce using rule 14 (expression -> expression TIMES expression .)
+    GREATER_THAN    reduce using rule 14 (expression -> expression TIMES expression .)
+    LESS_THAN       reduce using rule 14 (expression -> expression TIMES expression .)
+    GREATER_EQUAL   reduce using rule 14 (expression -> expression TIMES expression .)
+    LESS_EQUAL      reduce using rule 14 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+  ! POWER           [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+  ! MODULO          [ reduce using rule 14 (expression -> expression TIMES expression .) ]
+
+
+state 30
+
+    (15) expression -> expression DIVIDE expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 15 (expression -> expression DIVIDE expression .)
+    IDENTIFIER      reduce using rule 15 (expression -> expression DIVIDE expression .)
+    INTEGER         reduce using rule 15 (expression -> expression DIVIDE expression .)
+    FLOAT           reduce using rule 15 (expression -> expression DIVIDE expression .)
+    STRING          reduce using rule 15 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 15 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 15 (expression -> expression DIVIDE expression .)
+    END_KW          reduce using rule 15 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 15 (expression -> expression DIVIDE expression .)
+    LOGICAL_AND     reduce using rule 15 (expression -> expression DIVIDE expression .)
+    LOGICAL_OR      reduce using rule 15 (expression -> expression DIVIDE expression .)
+    EQUAL_EQUAL     reduce using rule 15 (expression -> expression DIVIDE expression .)
+    NOT_EQUAL       reduce using rule 15 (expression -> expression DIVIDE expression .)
+    GREATER_THAN    reduce using rule 15 (expression -> expression DIVIDE expression .)
+    LESS_THAN       reduce using rule 15 (expression -> expression DIVIDE expression .)
+    GREATER_EQUAL   reduce using rule 15 (expression -> expression DIVIDE expression .)
+    LESS_EQUAL      reduce using rule 15 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+  ! POWER           [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+  ! MODULO          [ reduce using rule 15 (expression -> expression DIVIDE expression .) ]
+
+
+state 31
+
+    (16) expression -> expression POWER expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 16 (expression -> expression POWER expression .)
+    IDENTIFIER      reduce using rule 16 (expression -> expression POWER expression .)
+    INTEGER         reduce using rule 16 (expression -> expression POWER expression .)
+    FLOAT           reduce using rule 16 (expression -> expression POWER expression .)
+    STRING          reduce using rule 16 (expression -> expression POWER expression .)
+    IF              reduce using rule 16 (expression -> expression POWER expression .)
+    $end            reduce using rule 16 (expression -> expression POWER expression .)
+    END_KW          reduce using rule 16 (expression -> expression POWER expression .)
+    ELSE            reduce using rule 16 (expression -> expression POWER expression .)
+    LOGICAL_AND     reduce using rule 16 (expression -> expression POWER expression .)
+    LOGICAL_OR      reduce using rule 16 (expression -> expression POWER expression .)
+    EQUAL_EQUAL     reduce using rule 16 (expression -> expression POWER expression .)
+    NOT_EQUAL       reduce using rule 16 (expression -> expression POWER expression .)
+    GREATER_THAN    reduce using rule 16 (expression -> expression POWER expression .)
+    LESS_THAN       reduce using rule 16 (expression -> expression POWER expression .)
+    GREATER_EQUAL   reduce using rule 16 (expression -> expression POWER expression .)
+    LESS_EQUAL      reduce using rule 16 (expression -> expression POWER expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 16 (expression -> expression POWER expression .) ]
+  ! MINUS           [ reduce using rule 16 (expression -> expression POWER expression .) ]
+  ! TIMES           [ reduce using rule 16 (expression -> expression POWER expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression POWER expression .) ]
+  ! POWER           [ reduce using rule 16 (expression -> expression POWER expression .) ]
+  ! MODULO          [ reduce using rule 16 (expression -> expression POWER expression .) ]
+
+
+state 32
+
+    (17) expression -> expression MODULO expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+    PUTS            reduce using rule 17 (expression -> expression MODULO expression .)
+    IDENTIFIER      reduce using rule 17 (expression -> expression MODULO expression .)
+    INTEGER         reduce using rule 17 (expression -> expression MODULO expression .)
+    FLOAT           reduce using rule 17 (expression -> expression MODULO expression .)
+    STRING          reduce using rule 17 (expression -> expression MODULO expression .)
+    IF              reduce using rule 17 (expression -> expression MODULO expression .)
+    $end            reduce using rule 17 (expression -> expression MODULO expression .)
+    END_KW          reduce using rule 17 (expression -> expression MODULO expression .)
+    ELSE            reduce using rule 17 (expression -> expression MODULO expression .)
+    LOGICAL_AND     reduce using rule 17 (expression -> expression MODULO expression .)
+    LOGICAL_OR      reduce using rule 17 (expression -> expression MODULO expression .)
+    EQUAL_EQUAL     reduce using rule 17 (expression -> expression MODULO expression .)
+    NOT_EQUAL       reduce using rule 17 (expression -> expression MODULO expression .)
+    GREATER_THAN    reduce using rule 17 (expression -> expression MODULO expression .)
+    LESS_THAN       reduce using rule 17 (expression -> expression MODULO expression .)
+    GREATER_EQUAL   reduce using rule 17 (expression -> expression MODULO expression .)
+    LESS_EQUAL      reduce using rule 17 (expression -> expression MODULO expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+  ! MINUS           [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+  ! TIMES           [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+  ! DIVIDE          [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+  ! POWER           [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+  ! MODULO          [ reduce using rule 17 (expression -> expression MODULO expression .) ]
+
+
+state 33
+
+    (10) input -> IDENTIFIER ASSIGN GETS . DOT IDENTIFIER
+
+    DOT             shift and go to state 44
+
+
+state 34
+
+    (11) assignment -> IDENTIFIER ASSIGN expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    IDENTIFIER      reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    INTEGER         reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    FLOAT           reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    STRING          reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    IF              reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    $end            reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    END_KW          reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    ELSE            reduce using rule 11 (assignment -> IDENTIFIER ASSIGN expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 35
+
+    (30) if_statement -> IF condition statement_list . END_KW
+    (31) if_statement -> IF condition statement_list . ELSE statement_list END_KW
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
+
+    END_KW          shift and go to state 45
+    ELSE            shift and go to state 46
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
+
+state 36
+
+    (22) condition -> expression LOGICAL_AND . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 47
+
+state 37
+
+    (23) condition -> expression LOGICAL_OR . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 48
+
+state 38
+
+    (24) condition -> expression EQUAL_EQUAL . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 49
+
+state 39
+
+    (25) condition -> expression NOT_EQUAL . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 50
+
+state 40
+
+    (26) condition -> expression GREATER_THAN . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 51
+
+state 41
+
+    (27) condition -> expression LESS_THAN . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 52
+
+state 42
+
+    (28) condition -> expression GREATER_EQUAL . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 53
+
+state 43
+
+    (29) condition -> expression LESS_EQUAL . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IDENTIFIER      shift and go to state 23
+
+    expression                     shift and go to state 54
+
+state 44
+
+    (10) input -> IDENTIFIER ASSIGN GETS DOT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 55
+
+
+state 45
+
+    (30) if_statement -> IF condition statement_list END_KW .
+
+    PUTS            reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    IDENTIFIER      reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    INTEGER         reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    FLOAT           reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    STRING          reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    IF              reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    $end            reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    END_KW          reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+    ELSE            reduce using rule 30 (if_statement -> IF condition statement_list END_KW .)
+
+
+state 46
+
+    (31) if_statement -> IF condition statement_list ELSE . statement_list END_KW
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
+
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
+
+    statement_list                 shift and go to state 56
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
+
+state 47
+
+    (22) condition -> expression LOGICAL_AND expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    IDENTIFIER      reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    INTEGER         reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    FLOAT           reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    STRING          reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    IF              reduce using rule 22 (condition -> expression LOGICAL_AND expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 48
+
+    (23) condition -> expression LOGICAL_OR expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    IDENTIFIER      reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    INTEGER         reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    FLOAT           reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    STRING          reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    IF              reduce using rule 23 (condition -> expression LOGICAL_OR expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 49
+
+    (24) condition -> expression EQUAL_EQUAL expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    IDENTIFIER      reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    INTEGER         reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    FLOAT           reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    STRING          reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    IF              reduce using rule 24 (condition -> expression EQUAL_EQUAL expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 50
+
+    (25) condition -> expression NOT_EQUAL expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    IDENTIFIER      reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    INTEGER         reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    FLOAT           reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    STRING          reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    IF              reduce using rule 25 (condition -> expression NOT_EQUAL expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 51
+
+    (26) condition -> expression GREATER_THAN expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    IDENTIFIER      reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    INTEGER         reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    FLOAT           reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    STRING          reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    IF              reduce using rule 26 (condition -> expression GREATER_THAN expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 52
+
+    (27) condition -> expression LESS_THAN expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    IDENTIFIER      reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    INTEGER         reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    FLOAT           reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    STRING          reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    IF              reduce using rule 27 (condition -> expression LESS_THAN expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 53
+
+    (28) condition -> expression GREATER_EQUAL expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    IDENTIFIER      reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    INTEGER         reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    FLOAT           reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    STRING          reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    IF              reduce using rule 28 (condition -> expression GREATER_EQUAL expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 54
+
+    (29) condition -> expression LESS_EQUAL expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . POWER expression
+    (17) expression -> expression . MODULO expression
+
+    PUTS            reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    IDENTIFIER      reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    INTEGER         reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    FLOAT           reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    STRING          reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    IF              reduce using rule 29 (condition -> expression LESS_EQUAL expression .)
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 18
+    DIVIDE          shift and go to state 19
+    POWER           shift and go to state 20
+    MODULO          shift and go to state 21
+
+
+state 55
+
+    (10) input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .
+
+    PUTS            reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    IDENTIFIER      reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    INTEGER         reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    FLOAT           reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    STRING          reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    IF              reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    $end            reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    END_KW          reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+    ELSE            reduce using rule 10 (input -> IDENTIFIER ASSIGN GETS DOT IDENTIFIER .)
+
+
+state 56
+
+    (31) if_statement -> IF condition statement_list ELSE statement_list . END_KW
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . print
+    (5) statement -> . input
+    (6) statement -> . assignment
+    (7) statement -> . expression
+    (8) statement -> . if_statement
+    (9) print -> . PUTS expression
+    (10) input -> . IDENTIFIER ASSIGN GETS DOT IDENTIFIER
+    (11) assignment -> . IDENTIFIER ASSIGN expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression POWER expression
+    (17) expression -> . expression MODULO expression
+    (18) expression -> . INTEGER
+    (19) expression -> . FLOAT
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER
+    (30) if_statement -> . IF condition statement_list END_KW
+    (31) if_statement -> . IF condition statement_list ELSE statement_list END_KW
+
+    END_KW          shift and go to state 57
+    PUTS            shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    INTEGER         shift and go to state 11
+    FLOAT           shift and go to state 12
+    STRING          shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print                          shift and go to state 4
+    input                          shift and go to state 5
+    assignment                     shift and go to state 6
+    expression                     shift and go to state 7
+    if_statement                   shift and go to state 8
+
+state 57
+
+    (31) if_statement -> IF condition statement_list ELSE statement_list END_KW .
+
+    PUTS            reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    IDENTIFIER      reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    INTEGER         reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    FLOAT           reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    STRING          reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    IF              reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    $end            reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    END_KW          reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
+    ELSE            reduce using rule 31 (if_statement -> IF condition statement_list ELSE statement_list END_KW .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 20 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 20 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 20 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 21 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 21 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 22 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 22 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 22 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 23 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 23 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 23 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 23 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 23 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 24 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 24 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
-WARNING: shift/reduce conflict for POWER in state 25 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 25 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 27 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 27 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 27 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 27 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 28 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 28 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 28 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 28 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 29 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 29 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 29 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 29 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 29 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 29 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 30 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 30 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 30 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 30 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 30 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 30 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 31 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 31 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 31 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 31 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 32 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 32 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 32 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 32 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 32 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 32 resolved as shift

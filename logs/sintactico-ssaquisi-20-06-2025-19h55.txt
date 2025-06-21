@@ -1,0 +1,13 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 20/06/2025
+Hora: 19:55
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: DOT ('.') en la línea 2
+[Error Sintáctico] Token inesperado: UNTIL ('until') en la línea 5
+[Error Sintáctico] Token inesperado: PLUS_ASSIGN ('+=') en la línea 7
+[Error Sintáctico] Token inesperado: RETURN ('return') en la línea 15
+[Error Sintáctico] Token inesperado: LPAREN ('(') en la línea 21
+[Error Sintáctico] Token inesperado: CASE ('case') en la línea 26
+[Error Sintáctico] Token inesperado: WHEN ('when') en la línea 29
+[Error Sintáctico] Token inesperado: ELSE ('else') en la línea 31
