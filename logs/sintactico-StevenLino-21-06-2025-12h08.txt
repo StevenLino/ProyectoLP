@@ -1,0 +1,6 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 12:08
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: PLUS_ASSIGN ('+=') en la línea 8

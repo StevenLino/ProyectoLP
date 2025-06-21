@@ -52,6 +52,13 @@ def p_assignment(p):
     'assignment : IDENTIFIER ASSIGN expression'
     p[0] = ('assign', p[1], p[3])
 
+def p_assignment_composed(p):
+    '''assignment : IDENTIFIER PLUS_ASSIGN expression
+                  | IDENTIFIER MINUS_ASSIGN expression
+                  | IDENTIFIER TIMES_ASSIGN expression
+                  | IDENTIFIER DIVIDE_ASSIGN expression'''
+    p[0] = ('assign_op', p[2], p[1], p[3])
+
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression MINUS expression
@@ -78,6 +85,9 @@ def p_condition_logical(p):
     '''condition : expression LOGICAL_AND expression
                  | expression LOGICAL_OR expression'''
     p[0] = ('logical', p[2], p[1], p[3])
+
+#Steven Lino - Fin
+#--------------------
 
 # Silvia Saquisili - Inicio
 # Regla para los comparadores en condition
@@ -122,6 +132,31 @@ def p_empty(p):
 
 # Silvia Saquisili - Fin
 
+
+#Steven Lino - Inicio
+#--------------------
+def p_while_loop(p):
+    '''statement : WHILE condition statement_list END_KW'''
+    p[0] = ('while', p[2], p[3])
+
+
+# Estructura de datos -Arreglo
+def p_array(p):
+    '''expression : LBRACKET elements RBRACKET'''
+    p[0] = ('array', p[2])
+
+def p_elements(p):
+    '''elements : elements COMMA expression
+                | expression
+                | empty'''
+    if len(p) == 4:
+        p[0] = p[1] + [p[3]]
+    elif len(p) == 2 and p[1] != []:
+        p[0] = [p[1]]
+    else:
+        p[0] = []
+
+
 def p_error(p):
     if p:
         mensaje = f"[Error Sintáctico] Token inesperado: {p.type} ('{p.value}') en la línea {p.lineno}"
@@ -135,7 +170,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo3.rb"
+    archivo_rb = "algoritmos/algoritmo7.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()

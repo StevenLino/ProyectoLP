@@ -84,7 +84,14 @@ tokens = [
     'COMMA', 'SEMICOLON',
 
     #PUNTO
-    'DOT'
+    'DOT',
+
+    #STEVEN LINO - INICIO
+
+    #TERNARIOS
+    'TERNARY_Q', 'TERNARY_COLON','AMPERSAND', 'SYMBOL_COLON'
+
+    #STEVEN LINO - FIN
 ] + list(reserved.values())
 
 # SILVIA SAQUISILI - FIN
@@ -144,6 +151,13 @@ t_COMMA           = r','
 t_SEMICOLON       = r';'
 
 # SILVIA SAQUISILI - FIN
+
+# STEVEN LINO - INICIO
+t_TERNARY_Q = r'\?'
+t_TERNARY_COLON = r':'
+t_AMPERSAND = r'&'
+t_SYMBOL_COLON = r':[a-zA-Z_]\w*'
+# STEVEN LINO - FIN
 
 # -----------------------------
 

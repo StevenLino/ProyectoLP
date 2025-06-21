@@ -1,0 +1,10 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 12:00
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: CLASS ('class') en la línea 1
+[Error Sintáctico] Token inesperado: INSTANCE_VAR ('@completada') en la línea 11
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 13
+[Error Sintáctico] Token inesperado: CONSTANT ('Tarea') en la línea 15
+[Error Sintáctico] Token inesperado: DOT ('.') en la línea 16
