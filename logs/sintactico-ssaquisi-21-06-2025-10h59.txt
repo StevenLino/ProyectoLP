@@ -1,0 +1,10 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 10:59
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: DEF ('def') en la línea 1
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 6
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 11
+[Error Sintáctico] Token inesperado: LPAREN ('(') en la línea 14
+[Error Sintáctico] Token inesperado: ENSURE ('ensure') en la línea 17

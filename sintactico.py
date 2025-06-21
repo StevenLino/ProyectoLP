@@ -80,7 +80,6 @@ def p_condition_logical(p):
     p[0] = ('logical', p[2], p[1], p[3])
 
 # Silvia Saquisili - Inicio
-
 # Regla para los comparadores en condition
 def p_condition_comparison(p):
     ''' condition : expression EQUAL_EQUAL expression
@@ -91,14 +90,35 @@ def p_condition_comparison(p):
                   | expression LESS_EQUAL expression'''
     p[0] = ('compare', p[2], p[1], p[3])
 
-# Reglas para los condicionales if, else, elsif, end en Ruby
+# Reglas completas para condicionales Ruby
 def p_if_statement(p):
-    '''if_statement : IF condition statement_list END_KW
-                    | IF condition statement_list ELSE statement_list END_KW'''
+    '''if_statement : IF condition statement_list elsif_blocks_opt else_block_opt END_KW'''
+    p[0] = ('if_full', p[2], p[3], p[4] + p[5])
+
+def p_elsif_blocks_opt(p):
+    '''elsif_blocks_opt : elsif_blocks
+                        | empty'''
+    p[0] = p[1]
+
+def p_elsif_blocks(p):
+    '''elsif_blocks :  elsif_blocks ELSIF condition statement_list
+                    | ELSIF condition statement_list'''
     if len(p) == 5:
-        p[0] = ('if', p[2], p[3])
+        p[0] = p[1] + [('elsif', p[3], p[4])]
     else:
-        p[0] = ('if_else', p[2], p[3], p[5])
+        p[0] = [('elsif', p[2], p[3])]
+
+def p_else_block_opt(p):
+    '''else_block_opt : ELSE statement_list
+                      | empty'''
+    if len(p) == 3:
+        p[0] = [('else', p[2])]
+    else:
+        p[0] = []
+
+def p_empty(p):
+    'empty : '
+    p[0] = []
 
 # Silvia Saquisili - Fin
 
@@ -115,7 +135,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo9.rb"
+    archivo_rb = "algoritmos/algoritmo3.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()
