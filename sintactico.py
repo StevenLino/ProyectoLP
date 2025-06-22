@@ -209,6 +209,24 @@ def p_function_def_no_parens(p):
     p[0] = ('function_def_no_parens', p[2], p[3], p[4])
 #Angel Gómez - Fin
 
+
+# Steven Lino -Inicio
+#--------------------
+
+# Métodos de clase (definidos con self. o Clase.)
+def p_function_def_class_method(p):
+    '''function_def : DEF SELF DOT IDENTIFIER statement_list END_KW
+                    | DEF CONSTANT DOT IDENTIFIER statement_list END_KW'''
+    p[0] = ('class_method_def', p[3], p[4], p[5])
+
+
+def p_statement_yield(p):
+    'statement : YIELD'
+    p[0] = ('yield',)
+
+# Steven Lino - Fin
+#--------------------
+
 # Parámetros con valores por defecto
 def p_param(p):
     '''param : IDENTIFIER
