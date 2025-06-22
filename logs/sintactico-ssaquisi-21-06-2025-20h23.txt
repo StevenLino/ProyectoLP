@@ -1,0 +1,12 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 20:23
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: TERNARY_Q ('?') en la línea 2
+[Error Sintáctico] Token inesperado: AND ('and') en la línea 2
+[Error Sintáctico] Token inesperado: RETURN ('return') en la línea 3
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 6
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 11
+[Error Sintáctico] Token inesperado: COMMA (',') en la línea 14
+[Error Sintáctico] Token inesperado: ENSURE ('ensure') en la línea 17

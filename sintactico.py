@@ -50,7 +50,8 @@ def p_statement(p):
                  | input
                  | assignment
                  | expression
-                 | if_statement'''
+                 | if_statement
+                 | function_def'''
     p[0] = p[1]
 
 def p_print(p):
@@ -175,7 +176,38 @@ def p_empty(p):
     p[0] = []
 
 # Silvia Saquisili - Fin
+#--------------------
 
+# Silvia Saquisili - Inicio
+# Definición de funciones
+# Función con paréntesis y parámetros opcionales
+def p_function_def(p):
+    '''function_def : DEF IDENTIFIER LPAREN param_list_opt RPAREN statement_list END_KW'''
+    p[0] = ('function_def', p[2], p[4], p[6])
+
+# Parámetros con valores por defecto
+def p_param(p):
+    '''param : IDENTIFIER
+             | IDENTIFIER ASSIGN expression'''
+    if len(p) == 2:
+        p[0] = ('param', p[1], None)
+    else:
+        p[0] = ('param', p[1], p[3])
+
+def p_param_list_opt(p):
+    '''param_list_opt : param_list
+                      | empty'''
+    p[0] = p[1]
+
+def p_param_list(p):
+    '''param_list : param
+                  | param_list COMMA param'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+
+# Silvia Saquisili - Fin
 
 #Steven Lino - Inicio
 #--------------------
