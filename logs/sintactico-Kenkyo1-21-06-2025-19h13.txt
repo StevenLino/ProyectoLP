@@ -1,0 +1,15 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 19:13
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: DEF ('def') en la línea 1
+[Error Sintáctico] Token inesperado: COMMA (',') en la línea 1
+[Error Sintáctico] Token inesperado: WHEN ('when') en la línea 5
+[Error Sintáctico] Token inesperado: WHEN ('when') en la línea 7
+[Error Sintáctico] Token inesperado: WHEN ('when') en la línea 9
+[Error Sintáctico] Token inesperado: TERNARY_Q ('?') en la línea 10
+[Error Sintáctico] Token inesperado: TERNARY_COLON (':') en la línea 10
+[Error Sintáctico] Token inesperado: DOT ('.') en la línea 19
+[Error Sintáctico] Token inesperado: DOT ('.') en la línea 21
+[Error Sintáctico] Token inesperado: COMMA (',') en la línea 26

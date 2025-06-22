@@ -4,6 +4,19 @@ import os
 from datetime import datetime
 import subprocess
 
+# Angel Gómez - Inicio
+# Reglas de precedencia
+precedence = (
+    ('left', 'LOGICAL_OR'),
+    ('left', 'LOGICAL_AND'),
+    ('left', 'EQUAL_EQUAL', 'NOT_EQUAL', 'GREATER_THAN', 'LESS_THAN', 'GREATER_EQUAL', 'LESS_EQUAL'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE', 'MODULO'),
+    ('right', 'POWER'),  # Exponenciación es derecha-asociativa
+    ('right', 'UMINUS')  # Unario negativo
+)
+# Angel Gómez - Final
+
 errores_sintacticos = []
 
 # Indicar la regla inicial del parser:
@@ -59,13 +72,30 @@ def p_assignment_composed(p):
                   | IDENTIFIER DIVIDE_ASSIGN expression'''
     p[0] = ('assign_op', p[2], p[1], p[3])
 
+# Angel Gómez - Inicio
+def p_assignment_logical_op(p):
+    '''assignment : IDENTIFIER OR_ASSIGN expression
+                  | IDENTIFIER AND_ASSIGN expression'''
+    p[0] = ('assign_op', p[2], p[1], p[3])
+
+# Agrupación con parentesis
+def p_expression_group(p):
+    'expression : LPAREN expression RPAREN'
+    p[0] = p[2]
+
+def p_expression_uminus(p):
+    'expression : MINUS expression %prec UMINUS'
+    p[0] = ('neg', p[2])
+
+# Angel Gómez - Final
+
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression
-                  | expression POWER expression
-                  | expression MODULO expression'''
+                  | expression MODULO expression
+                  | expression POWER expression'''
     p[0] = ('binop', p[2], p[1], p[3])
 
 def p_expression_number(p):
@@ -81,12 +111,26 @@ def p_expression_identifier(p):
     'expression : IDENTIFIER'
     p[0] = ('var', p[1])
 
-def p_condition_logical(p):
-    '''condition : expression LOGICAL_AND expression
-                 | expression LOGICAL_OR expression'''
-    p[0] = ('logical', p[2], p[1], p[3])
+#def p_condition_logical(p):
+    #'''condition : expression LOGICAL_AND expression
+     #            | expression LOGICAL_OR expression'''
+    #p[0] = ('logical', p[2], p[1], p[3])
 
 #Steven Lino - Fin
+
+# Angel Gómez - Inicio
+def p_expression_condition(p):
+    '''expression : expression LOGICAL_AND expression
+                  | expression LOGICAL_OR expression
+                  | expression EQUAL_EQUAL expression
+                  | expression NOT_EQUAL expression
+                  | expression GREATER_THAN expression
+                  | expression LESS_THAN expression
+                  | expression GREATER_EQUAL expression
+                  | expression LESS_EQUAL expression'''
+    p[0] = ('binop', p[2], p[1], p[3])
+# Angel Gómez - Fin
+
 #--------------------
 
 # Silvia Saquisili - Inicio
@@ -170,7 +214,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo7.rb"
+    archivo_rb = "algoritmos/algoritmo5.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()
