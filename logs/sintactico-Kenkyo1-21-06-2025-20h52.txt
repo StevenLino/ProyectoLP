@@ -1,0 +1,12 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 20:52
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: CONSTANT ('BEGIN') en la línea 1
+[Error Sintáctico] Token inesperado: INSTANCE_VAR ('@nombre') en la línea 6
+[Error Sintáctico] Token inesperado: ELSIF ('elsif') en la línea 12
+[Error Sintáctico] Token inesperado: ELSE ('else') en la línea 14
+[Error Sintáctico] Token inesperado: CONSTANT ('Animal') en la línea 20
+[Error Sintáctico] Token inesperado: COMMA (',') en la línea 20
+[Error Sintáctico] Token inesperado: RBRACKET (']') en la línea 20

@@ -51,7 +51,10 @@ def p_statement(p):
                  | assignment
                  | expression
                  | if_statement
-                 | function_def'''
+                 | function_def
+                 | while_statement
+                 | unless_statement 
+                 | case_statement''' # agrego unless_statemente y case_statement - Angel Gómez
     p[0] = p[1]
 
 def p_print(p):
@@ -108,19 +111,24 @@ def p_expression_string(p):
     'expression : STRING'
     p[0] = p[1]
 
+# Angel Gómez - Inicio
+# Regla para la estructura de datos Symbols
+def p_expression_symbol(p):
+    'expression : SYMBOL_COLON'
+    p[0] = ('symbol', p[1])
+# Angel Gómez - Fin
+
 def p_expression_identifier(p):
     'expression : IDENTIFIER'
     p[0] = ('var', p[1])
 
-#def p_condition_logical(p):
-    #'''condition : expression LOGICAL_AND expression
-     #            | expression LOGICAL_OR expression'''
-    #p[0] = ('logical', p[2], p[1], p[3])
-
 #Steven Lino - Fin
 
-# Angel Gómez - Inicio
-def p_expression_condition(p):
+#--------------------
+
+# Silvia Saquisili - Inicio
+# Regla para los comparadores en condition
+def p_expression_condition(p): #Se combinaron dos reglas sintacticas que generaban ambiguedad
     '''expression : expression LOGICAL_AND expression
                   | expression LOGICAL_OR expression
                   | expression EQUAL_EQUAL expression
@@ -130,34 +138,43 @@ def p_expression_condition(p):
                   | expression GREATER_EQUAL expression
                   | expression LESS_EQUAL expression'''
     p[0] = ('binop', p[2], p[1], p[3])
-# Angel Gómez - Fin
-
-#--------------------
-
-# Silvia Saquisili - Inicio
-# Regla para los comparadores en condition
-def p_condition_comparison(p):
-    ''' condition : expression EQUAL_EQUAL expression
-                  | expression NOT_EQUAL expression
-                  | expression GREATER_THAN expression
-                  | expression LESS_THAN expression
-                  | expression GREATER_EQUAL expression
-                  | expression LESS_EQUAL expression'''
-    p[0] = ('compare', p[2], p[1], p[3])
 
 # Reglas completas para condicionales Ruby
 def p_if_statement(p):
-    '''if_statement : IF condition statement_list elsif_blocks_opt else_block_opt END_KW'''
+    '''if_statement : IF expression statement_list elsif_blocks_opt else_block_opt END_KW'''
     p[0] = ('if_full', p[2], p[3], p[4] + p[5])
+
+# Angel Gómez - Inicio
+# Regla para la estructura de control unless y case
+def p_unless_statement(p):
+    '''unless_statement : UNLESS expression statement_list else_block_opt END_KW'''
+    p[0] = ('unless', p[2], p[3], p[4])
+
+def p_case_statement(p):
+    '''case_statement : CASE expression when_blocks else_block_opt END_KW'''
+    p[0] = ('case', p[2], p[3], p[4])
+
+def p_when_blocks(p):
+    '''when_blocks : when_blocks when_block
+                   | when_block'''
+    if len(p) == 3:
+        p[0] = p[1] + [p[2]]
+    else:
+        p[0] = [p[1]]
+
+def p_when_block(p):
+    'when_block : WHEN expression statement_list'
+    p[0] = ('when', p[2], p[3])
+# Angel Gómez - Fin
 
 def p_elsif_blocks_opt(p):
     '''elsif_blocks_opt : elsif_blocks
                         | empty'''
     p[0] = p[1]
 
-def p_elsif_blocks(p):
-    '''elsif_blocks :  elsif_blocks ELSIF condition statement_list
-                    | ELSIF condition statement_list'''
+def p_elsif_blocks(p): #correciones para evitar problemas de recursion
+    '''elsif_blocks : ELSIF expression statement_list elsif_blocks
+                    | ELSIF expression statement_list'''
     if len(p) == 5:
         p[0] = p[1] + [('elsif', p[3], p[4])]
     else:
@@ -185,6 +202,13 @@ def p_function_def(p):
     '''function_def : DEF IDENTIFIER LPAREN param_list_opt RPAREN statement_list END_KW'''
     p[0] = ('function_def', p[2], p[4], p[6])
 
+#Angel Gómez - Inicio
+# Función sin paréntesis (param_list_opt ya admite vacío)
+def p_function_def_no_parens(p):
+    '''function_def : DEF IDENTIFIER param_list_opt statement_list END_KW'''
+    p[0] = ('function_def_no_parens', p[2], p[3], p[4])
+#Angel Gómez - Fin
+
 # Parámetros con valores por defecto
 def p_param(p):
     '''param : IDENTIFIER
@@ -211,8 +235,8 @@ def p_param_list(p):
 
 #Steven Lino - Inicio
 #--------------------
-def p_while_loop(p):
-    '''statement : WHILE condition statement_list END_KW'''
+def p_while_statement(p): #correción para evitar conflictos
+    '''while_statement : WHILE expression statement_list END_KW'''
     p[0] = ('while', p[2], p[3])
 
 
@@ -275,7 +299,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo3.rb"
+    archivo_rb = "algoritmos/algoritmo1.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()

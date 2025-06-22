@@ -1,0 +1,11 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 21/06/2025
+Hora: 20:50
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: IDENTIFIER ('print') en la línea 4
+[Error Sintáctico] Token inesperado: DOT ('.') en la línea 8
+[Error Sintáctico] Token inesperado: IDENTIFIER ('nombre') en la línea 10
+[Error Sintáctico] Token inesperado: LESS_THAN ('<') en la línea 16
+[Error Sintáctico] Token inesperado: LBRACKET ('[') en la línea 20
+[Error Sintáctico] Token inesperado: ELSE ('else') en la línea 22
