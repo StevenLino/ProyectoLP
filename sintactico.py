@@ -171,7 +171,7 @@ def p_else_block_opt(p):
         p[0] = []
 
 def p_empty(p):
-    'empty : '
+    'empty :'
     p[0] = []
 
 # Silvia Saquisili - Fin
@@ -199,8 +199,37 @@ def p_elements(p):
         p[0] = [p[1]]
     else:
         p[0] = []
+#Steven Lino - Fin
 
+# Silvia Saquisili - Inicio
+# Reglas corregidas para hash que evitan recursión infinita
 
+def p_expression_hash(p):
+    '''expression : LBRACE hash_content RBRACE'''
+    p[0] = ('hash', p[2])
+
+def p_hash_content(p):
+    '''hash_content : hash_pair_list
+                    | '''
+    if len(p) == 1:
+        p[0] = []
+    else:
+        p[0] = p[1]
+
+def p_hash_pair_list(p):
+    '''hash_pair_list : hash_pair
+                      | hash_pair_list COMMA hash_pair'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+
+def p_hash_pair(p):
+    '''hash_pair : SYMBOL_COLON ASSIGN expression'''
+    p[0] = (p[1], p[3])
+# Silvia Saquisili - Fin
+
+#Steven Lino - Inicio
 def p_error(p):
     if p:
         mensaje = f"[Error Sintáctico] Token inesperado: {p.type} ('{p.value}') en la línea {p.lineno}"
@@ -214,7 +243,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo5.rb"
+    archivo_rb = "algoritmos/algoritmo3.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()
