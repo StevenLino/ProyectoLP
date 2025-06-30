@@ -1,0 +1,10 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 29/06/2025
+Hora: 21:54
+
+--- ERRORES ---
+[Error Semántico] Variable 'titulo' no definida
+[Error Semántico] Tipo desconocido asignado a 'tareas': ('array', [('new_object', 'Tarea', ['String', ('new_object', 'Tarea', ['String'])])])
+[Error Semántico] Variable 'tareas' no definida
+[Error Semántico] Variable 'marcar_como_completada' no definida
+[Error Semántico] Variable 'each' no definida
