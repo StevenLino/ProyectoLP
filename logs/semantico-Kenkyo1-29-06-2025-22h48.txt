@@ -1,0 +1,29 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 29/06/2025
+Hora: 22:48
+
+--- ERRORES ---
+[Error Semántico] Variable 'operador' no definida
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Tipo inválido en operación: Error + Error
+[Error Semántico] 'return' fuera de una función.
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Tipo inválido en operación: Error - Error
+[Error Semántico] 'return' fuera de una función.
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Tipo inválido en operación: Error * Error
+[Error Semántico] 'return' fuera de una función.
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] 'return' fuera de una función.
+[Error Semántico] Variable 'print' no definida
+[Error Semántico] Variable 'to_f' no definida
+[Error Semántico] Variable 'print' no definida
+[Error Semántico] Variable 'to_f' no definida
+[Error Semántico] Variable 'print' no definida
+[Error Semántico] Variable 'calcular' no definida
+[Error Semántico] Tipo desconocido asignado a 'resultado': Error
+[Error Semántico] Variable 'num1' no definida

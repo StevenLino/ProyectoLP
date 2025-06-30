@@ -11,6 +11,9 @@ tabla_simbolos = {
     "funciones": {},  # nombre: tipo_retorno
     "tipos_validos": ["Integer", "Float", "String", "Boolean", "Array", "Hash", "Nil"],
 }
+# Contexto de funciones
+contexto_funcion = []
+
 
 errores_semanticos = []
 
@@ -260,7 +263,7 @@ def p_elsif_blocks(p): #correciones para evitar problemas de recursion
     '''elsif_blocks : ELSIF expression statement_list elsif_blocks
                     | ELSIF expression statement_list'''
     if len(p) == 5:
-        p[0] = p[1] + [('elsif', p[3], p[4])]
+        p[0] = [('elsif', p[2], p[3])] + p[4] # Correción de errores sintactico
     else:
         p[0] = [('elsif', p[2], p[3])]
 
@@ -279,12 +282,53 @@ def p_empty(p):
 # Silvia Saquisili - Fin
 #--------------------
 
-# Silvia Saquisili - Inicio
-# Definición de funciones
-# Función con paréntesis y parámetros opcionales
+# Reglas semantica para funciones y tipo de retorno INICIO - Angel Gomez
 def p_function_def(p):
     '''function_def : DEF IDENTIFIER LPAREN param_list_opt RPAREN statement_list END_KW'''
-    p[0] = ('function_def', p[2], p[4], p[6])
+    nombre = p[2]
+    # Ingresar a contexto
+    contexto_funcion.append(nombre)
+
+    # CORRECION SEMANTICA PARA VARIABLE
+    for param in p[4]:  # p[4] es la lista de parámetros
+        if param[0] == 'param':
+            tabla_simbolos["variables"][param[1]] = "String"  # o inferido
+
+    # Si hubo una sentencia return, la función tendrá un tipo (evaluado abajo)
+    tipo_retorno = None
+    for stmt in p[6]:
+        if isinstance(stmt, tuple) and stmt[0] == 'return':
+            tipo_retorno = stmt[1]
+            break
+
+    if tipo_retorno is None:
+        tipo_retorno = "Nil"  # Asumimos que no retorna nada explícitamente
+
+    tabla_simbolos["funciones"][nombre] = tipo_retorno
+
+    # Salir del contexto
+    contexto_funcion.pop()
+
+    p[0] = ('function', nombre, tipo_retorno)
+
+def p_statement_return(p):
+    'statement : RETURN expression'
+    tipo_retorno = p[2]
+
+    if not contexto_funcion:
+        registrar_error("[Error Semántico] 'return' fuera de una función.")
+    else:
+        funcion_actual = contexto_funcion[-1]
+        tipo_esperado = tabla_simbolos["funciones"].get(funcion_actual, "Desconocido")
+
+        # Si ya se conoce el tipo anterior, validar que sea coherente
+        if tipo_esperado != "Desconocido" and tipo_esperado != tipo_retorno:
+            registrar_error(
+                f"[Error Semántico] Tipo de retorno inválido en función '{funcion_actual}'. Se esperaba {tipo_esperado}, se obtuvo {tipo_retorno}")
+
+    p[0] = ('return', tipo_retorno)
+
+# Reglas semantica para funciones y tipo de retorno INICIO - Angel Gomez
 
 #Angel Gómez - Inicio
 # Función sin paréntesis (param_list_opt ya admite vacío)
@@ -352,6 +396,32 @@ def p_symbol_list(p):
         p[0] = p[1] + [p[3]]
 # Reglas de definición de Clases y Objetos FIN - Angel Gomez
 
+# Regla para mejorar el llamado de metodos
+def p_expression_method_call(p):
+    '''expression : IDENTIFIER DOT IDENTIFIER LPAREN arg_list RPAREN'''
+    # p[1] = clase u objeto
+    # p[3] = método (new, hablar, etc.)
+    # p[5] = argumentos
+    nombre_objeto_o_clase = p[1]
+    metodo = p[3]
+
+    if metodo == 'new':
+        tipo = nombre_objeto_o_clase
+    else:
+        tipo = "Desconocido"
+
+    p[0] = tipo
+
+def p_arg_list(p):
+    '''arg_list : arg_list COMMA expression
+                | expression
+                | empty'''
+    if len(p) == 4:
+        p[0] = [p[1]] + [p[3]]
+    elif len(p) == 2 and p[1] != []:
+        p[0] = [p[1]]
+    else:
+        p[0] = []
 
 # Parámetros con valores por defecto
 def p_param(p):
@@ -377,17 +447,36 @@ def p_param_list(p):
 
 # Silvia Saquisili - Fin
 
-#Steven Lino - Inicio
-#--------------------
-def p_while_statement(p): #correción para evitar conflictos
+# Reglas semantica de validación de break, next y while INICIO - Angel Gómez
+nivel_bucle = 0
+
+def p_while_statement(p):
     '''while_statement : WHILE expression statement_list END_KW'''
-    p[0] = ('while', p[2], p[3])
+    global nivel_bucle
+    if p[2] != "Boolean":
+        registrar_error(f"[Error Semántico] Condición no booleana en bucle while.")
+    nivel_bucle += 1
+    nivel_bucle -= 1
+    p[0] = ('while', p[2])
 
+def p_statement_break(p):
+    'statement : BREAK'
+    if nivel_bucle <= 0:
+        registrar_error(f"[Error Semántico] 'break' usado fuera de un bucle.")
+    p[0] = ('break',)
 
+def p_statement_next(p):
+    'statement : NEXT'
+    if nivel_bucle <= 0:
+        registrar_error(f"[Error Semántico] 'next' usado fuera de un bucle.")
+    p[0] = ('next',)
+# Reglas semantica de validación de break, next y while FIN - Angel Gómez
+
+#Steven Lino - Inicio
 # Estructura de datos -Arreglo
 def p_array(p):
     '''expression : LBRACKET elements RBRACKET'''
-    p[0] = ('array', p[2])
+    p[0] = "Array" #modificacion
 
 def p_elements(p):
     '''elements : elements COMMA expression

@@ -1,0 +1,7 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 29/06/2025
+Hora: 22:46
+
+--- ERRORES ---
+[Error Semántico] Variable 'titulo' no definida
+[Error Semántico] Variable 'marcar_como_completada' no definida
