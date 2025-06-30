@@ -1,0 +1,16 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 29/06/2025
+Hora: 22:22
+
+--- ERRORES ---
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Tipo inválido en operación: Error + Error
+[Error Semántico] Variable 'clss' no definida
+[Error Semántico] Variable 'initialize' no definida
+[Error Semántico] Variable 'n' no definida
+[Error Semántico] Variable 'n' no definida
+[Error Semántico] Comparación no válida: String == Error
+[Error Semántico] Tipo inválido en operación: Integer + String
+[Error Semántico] Tipo desconocido asignado a 'z': Error
+[Error Semántico] Variable 'retn' no definida

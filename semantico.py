@@ -78,9 +78,15 @@ def p_print(p):
     'print : PUTS expression'
     p[0] = ('print', p[2])
 
+# Silvia Saquisili - Inicio
 def p_input(p):
     'input : IDENTIFIER ASSIGN GETS DOT IDENTIFIER'
-    p[0] = ('input', p[1], 'gets', p[5])
+    var_name = p[1]
+    tabla_simbolos["variables"][var_name] = "String"
+    p[0] = ('input', var_name, "String")
+
+# Silvia Saquisili - Fin
+# -----------------------------------------
 
 # Steven Lino - Inicio
 def p_assignment(p):
@@ -184,7 +190,10 @@ def p_expression_instance_var(p):
 
 # Silvia Saquisili - Inicio
 # Regla para los comparadores en condition
-def p_expression_condition(p): #Se combinaron dos reglas sintacticas que generaban ambiguedad
+
+# Silvia Saquisili - Inicio
+# REGLA SEMÁNTICA PARA CONDICIONES Y COMPARACIONES
+def p_expression_condition(p):
     '''expression : expression LOGICAL_AND expression
                   | expression LOGICAL_OR expression
                   | expression EQUAL_EQUAL expression
@@ -193,12 +202,31 @@ def p_expression_condition(p): #Se combinaron dos reglas sintacticas que generab
                   | expression LESS_THAN expression
                   | expression GREATER_EQUAL expression
                   | expression LESS_EQUAL expression'''
-    p[0] = ('binop', p[2], p[1], p[3])
+    tipo1 = p[1]
+    tipo2 = p[3]
+    op = p[2]
+
+    if tipo1 == tipo2 and tipo1 in ["Integer", "Float", "String"]:
+        p[0] = "Boolean"
+    else:
+        registrar_error(f"[Error Semántico] Comparación no válida: {tipo1} {op} {tipo2}")
+        p[0] = "Error"
+
+# Silvia Saquisili - Fin
+# -----------------------------------------
 
 # Reglas completas para condicionales Ruby
+
+# Silvia Saquisili - Inicio
+# REGLA SEMÁNTICA PARA CONDICIONES BOOLEANAS EN ESTRUCTURA DE CONTROL
 def p_if_statement(p):
     '''if_statement : IF expression statement_list elsif_blocks_opt else_block_opt END_KW'''
-    p[0] = ('if_full', p[2], p[3], p[4] + p[5])
+    if p[2] != "Boolean":
+        registrar_error(f"[Error Semántico] Condición no booleana en estructura de control (if).")
+    p[0] = ('if', p[2])
+
+# Silvia Saquisili - Fin
+# -----------------------------------------
 
 # Angel Gómez - Inicio
 # Regla para la estructura de control unless y case
@@ -420,7 +448,7 @@ def p_error(p):
 
 if __name__ == "__main__":
     parser = yacc.yacc(debug=True, debugfile="parser.out", tabmodule='parsetab')
-    archivo_rb = "algoritmos/algoritmo7.rb"
+    archivo_rb = "algoritmos/algoritmo2.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()

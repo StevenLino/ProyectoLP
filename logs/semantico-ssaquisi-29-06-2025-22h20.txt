@@ -1,0 +1,14 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 29/06/2025
+Hora: 22:20
+
+--- ERRORES ---
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Variable 'a' no definida
+[Error Semántico] Variable 'b' no definida
+[Error Semántico] Tipo inválido en operación: Error * Error
+[Error Semántico] Variable 'els' no definida
+[Error Semántico] Variable 'multiplicar' no definida
+[Error Semántico] Tipo desconocido asignado a 'resultado': Error
+[Error Semántico] Variable 'e' no definida
