@@ -1,0 +1,10 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 29/06/2025
+Hora: 20:37
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: LBRACE ('{') en la línea 1
+[Error Sintáctico] Token inesperado: ASSIGN ('=') en la línea 6
+[Error Sintáctico] Token inesperado: END_KW ('end') en la línea 18
+[Error Sintáctico] Token inesperado: FOR ('for') en la línea 22
+[Error Sintáctico] Token inesperado: TERNARY_Q ('?') en la línea 27

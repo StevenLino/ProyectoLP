@@ -54,7 +54,8 @@ def p_statement(p):
                  | function_def
                  | while_statement
                  | unless_statement 
-                 | case_statement''' # agrego unless_statemente y case_statement - Angel Gómez
+                 | case_statement
+                 | class_def''' # agrego unless_statemente y case_statement - Angel Gómez
     p[0] = p[1]
 
 def p_print(p):
@@ -123,6 +124,12 @@ def p_expression_identifier(p):
     p[0] = ('var', p[1])
 
 #Steven Lino - Fin
+
+# REGLAS SINTACTICA PARA VARIABLES DE INSTANCIA INICIO - Angel Gomez
+def p_expression_instance_var(p):
+    'expression : INSTANCE_VAR'
+    p[0] = "String"  #
+# REGLAS SINTACTICA PARA VARIABLES DE INSTANCIA FIN - Angel Gomez
 
 #--------------------
 
@@ -209,7 +216,6 @@ def p_function_def_no_parens(p):
     p[0] = ('function_def_no_parens', p[2], p[3], p[4])
 #Angel Gómez - Fin
 
-
 # Steven Lino -Inicio
 #--------------------
 
@@ -226,6 +232,49 @@ def p_statement_yield(p):
 
 # Steven Lino - Fin
 #--------------------
+
+# Reglas de definición de Clases y Objetos INICIO - Angel Gomez
+def p_class_def(p):
+    '''class_def : CLASS CONSTANT statement_list END_KW'''
+    p[0] = ('class_def', p[2], p[3])
+
+def p_object_creation(p):
+    '''expression : CONSTANT DOT NEW expression_list_opt'''
+    p[0] = ('new_object', p[1], p[4])
+
+def p_expression_list_opt(p):
+    '''expression_list_opt : expression_list
+                           | empty'''
+    p[0] = p[1]
+
+def p_expression_list(p):
+    '''expression_list : expression
+                       | expression_list COMMA expression'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+# Herencia
+def p_class_def_inherit(p):
+    '''class_def : CLASS CONSTANT LESS_THAN CONSTANT statement_list END_KW'''
+    p[0] = ('class_def_inherit', p[2], p[4], p[5])
+
+# Metodos utiles en clases
+def p_attr_statement(p):
+    '''statement : ATTR_ACCESSOR symbol_list
+                 | ATTR_READER symbol_list
+                 | ATTR_WRITER symbol_list'''
+    p[0] = ('attr', p[1], p[2])
+
+def p_symbol_list(p):
+    '''symbol_list : SYMBOL_COLON
+                   | symbol_list COMMA SYMBOL_COLON'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+# Reglas de definición de Clases y Objetos FIN - Angel Gomez
+
 
 # Parámetros con valores por defecto
 def p_param(p):
@@ -302,6 +351,12 @@ def p_hash_pair(p):
     '''hash_pair : SYMBOL_COLON ASSIGN expression'''
     p[0] = (p[1], p[3])
 # Silvia Saquisili - Fin
+
+# Rango
+def p_expression_range(p):
+    '''expression : expression RANGE_INCLUSIVE expression
+                  | expression RANGE_EXCLUSIVE expression'''
+    p[0] = ('range', p[2],p[1],p[3])
 
 #Steven Lino - Inicio
 def p_error(p):

@@ -45,11 +45,16 @@ reserved = {
     "when": "WHEN",
     "while": "WHILE",
     "yield": "YIELD",
-
     "gets": "GETS",
     #Correcion Inicio - Steven Lino
-    "puts": "PUTS"
+    "puts": "PUTS",
     #Correcion Fin - Steven Lino
+    # Se agrega nuevas palabras reservadas para CLASES - Angel Gomez
+    "new": "NEW",
+    "attr_accessor": "ATTR_ACCESSOR",
+    "attr_reader": "ATTR_READER",
+    "attr_writer": "ATTR_WRITER"
+    # Se agrega nuevas palabras reservadas para CLASES - Angel Gomez
 }
 
 # SILVIA SAQUISILI - FIN
