@@ -1,0 +1,9 @@
+=== LOG ANALIZADOR SEMANTICO ===
+Fecha: 10/07/2025
+Hora: 16:46
+
+--- ERRORES ---
+[Error Semántico] Variable 'nombre' no definida
+[Error Semántico] Variable 'animales' no definida
+[Error Semántico] Variable 'block_given?' no definida
+[Error Semántico] Variable 'saludar' no definida

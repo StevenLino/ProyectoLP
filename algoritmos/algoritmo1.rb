@@ -1,5 +1,5 @@
-BEGIN { puts "Inicio del script" }
-END { puts "Fin del script" }
+# BEGIN { puts "Inicio del script" }
+# END { puts "Fin del script" }
 
 class Animal
   def initialize(nombre)
@@ -19,9 +19,9 @@ end
 
 animales = [Animal.new("Perro"), Animal.new("Gato")]
 
-for animal in animales
-  animal.hablar
-end
+# for animal in animales
+#   animal.hablar
+# end
 
 def saludar
   yield if block_given?

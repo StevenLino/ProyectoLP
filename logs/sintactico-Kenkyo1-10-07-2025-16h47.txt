@@ -1,0 +1,6 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 10/07/2025
+Hora: 16:47
+
+--- ERRORES ---
+No se encontraron errores sintácticos.

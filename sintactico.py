@@ -88,6 +88,11 @@ def p_expression_group(p):
     'expression : LPAREN expression RPAREN'
     p[0] = p[2]
 
+# Nueva regla sintactico para expresiones de contengan {} - Angel Gómez
+def p_expression_block(p):
+    'expression : LBRACE statement_list RBRACE'
+    p[0] = ('block', p[2])
+
 def p_expression_uminus(p):
     'expression : MINUS expression %prec UMINUS'
     p[0] = ('neg', p[2])
@@ -112,12 +117,22 @@ def p_expression_string(p):
     'expression : STRING'
     p[0] = p[1]
 
+#Nueva regla para considera las llamadas a metodos - Angel Gómez
+def p_expression_method_call(p):
+    'expression : expression DOT IDENTIFIER'
+    p[0] = ('method_call', p[1], p[3])
+
 # Angel Gómez - Inicio
 # Regla para la estructura de datos Symbols
 def p_expression_symbol(p):
     'expression : SYMBOL_COLON'
     p[0] = ('symbol', p[1])
 # Angel Gómez - Fin
+
+# Nueva regla para identificar defined?. Esta es una consideración para evitar conflictos - Angel Gómez
+def p_expression_definedq(p):
+    'expression : DEFINEDQ'
+    p[0] = ('definedq',)
 
 def p_expression_identifier(p):
     'expression : IDENTIFIER'
@@ -129,6 +144,11 @@ def p_expression_identifier(p):
 def p_expression_instance_var(p):
     'expression : INSTANCE_VAR'
     p[0] = "String"  #
+
+# Regla para considerar las asignaciones
+def p_assignment_instance_var(p):
+    'assignment : INSTANCE_VAR ASSIGN expression'
+    p[0] = ('assign_instance', p[1], p[3])
 # REGLAS SINTACTICA PARA VARIABLES DE INSTANCIA FIN - Angel Gomez
 
 #--------------------
@@ -229,6 +249,11 @@ def p_function_def_class_method(p):
 def p_statement_yield(p):
     'statement : YIELD'
     p[0] = ('yield',)
+
+# Regla para considerar la expresión yield if condition
+def p_statement_yield_if(p):
+    'statement : YIELD IF expression'
+    p[0] = ('yield_if', p[3])
 
 # Steven Lino - Fin
 #--------------------

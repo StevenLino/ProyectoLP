@@ -94,7 +94,8 @@ tokens = [
     #STEVEN LINO - INICIO
 
     #TERNARIOS
-    'TERNARY_Q', 'TERNARY_COLON','AMPERSAND', 'SYMBOL_COLON'
+    'IDENTIFIER_Q', 'TERNARY_COLON','AMPERSAND', 'SYMBOL_COLON' # se borro ternary_colon para evitar conflictos
+    #Se agrego IDENTIFIER_Q
 
     #STEVEN LINO - FIN
 ] + list(reserved.values())
@@ -158,7 +159,6 @@ t_SEMICOLON       = r';'
 # SILVIA SAQUISILI - FIN
 
 # STEVEN LINO - INICIO
-t_TERNARY_Q = r'\?'
 t_TERNARY_COLON = r':'
 t_AMPERSAND = r'&'
 t_SYMBOL_COLON = r':[a-zA-Z_]\w*'
@@ -212,7 +212,7 @@ def t_CONSTANT(t):
     return t
 
 def t_IDENTIFIER(t):
-    r'[a-z_][a-zA-Z_0-9]*'
+    r'[a-z_][a-zA-Z_0-9]*[\?!]?' # se agrego una consideración extra para el identifier de tokens
     t.type = reserved.get(t.value, 'IDENTIFIER')
     return t
 
