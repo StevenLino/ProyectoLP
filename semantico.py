@@ -515,9 +515,12 @@ def p_while_statement(p):
     global nivel_bucle
     if p[2] != "Boolean":
         registrar_error(f"[Error Semántico] Condición no booleana en bucle while.")
-    nivel_bucle += 1
-    nivel_bucle -= 1
-    p[0] = ('while', p[2])
+
+    nivel_bucle += 1  # Entramos en un bucle
+    cuerpo = p[3]  # Procesamos el cuerpo del while
+    nivel_bucle -= 1  # Salimos del bucle
+
+    p[0] = ('while', p[2], cuerpo)
 
 def p_statement_break(p):
     'statement : BREAK'

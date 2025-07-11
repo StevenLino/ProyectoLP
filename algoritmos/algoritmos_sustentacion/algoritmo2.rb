@@ -28,12 +28,17 @@ gato = Animal.new
 gato.hablar
 
 # Bucle con break y next
-i = 0
-while i < 5
-  i += 1
-  next if i == 2
-  break if i == 4
-  puts i
+def bucle
+  i = 0
+  while i < 5
+    i += 1
+    if i == 2
+      next
+    elsif i == 4
+      break
+    end
+    puts i
+  end
 end
 
 # Función sin paréntesis
@@ -41,4 +46,3 @@ def saludar nombre
   puts "Hola, #{nombre}"
 end
 
-saludar "Carlos"

@@ -55,7 +55,8 @@ def p_statement(p):
                  | while_statement
                  | unless_statement 
                  | case_statement
-                 | class_def ''' # agrego unless_statemente y case_statement - Angel Gómez
+                 | class_def ''' # | statement_break
+                 # | statement_next''' # agrego unless_statemente y case_statement - Angel Gómez
     p[0] = p[1]
 
 def p_print(p):
@@ -190,6 +191,16 @@ def p_unless_statement(p):
 def p_case_statement(p):
     '''case_statement : CASE expression when_blocks else_block_opt END_KW'''
     p[0] = ('case', p[2], p[3], p[4])
+
+def p_statement_break(p):
+    '''statement_break : BREAK
+                        | BREAK IF expression'''
+    p[0] = ('break',)
+
+def p_statement_next(p):
+    '''statement_next : NEXT
+                        | NEXT IF expression'''
+    p[0] = ('next',)
 
 def p_when_blocks(p):
     '''when_blocks : when_blocks when_block
