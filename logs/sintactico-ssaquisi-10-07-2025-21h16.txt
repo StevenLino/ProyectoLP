@@ -1,0 +1,7 @@
+=== LOG ANALIZADOR SINTÁCTICO ===
+Fecha: 10/07/2025
+Hora: 21:16
+
+--- ERRORES ---
+[Error Sintáctico] Token inesperado: RETURN ('return') en la línea 13
+[Error Sintáctico] Token inesperado: TERNARY_COLON (':') en la línea 20

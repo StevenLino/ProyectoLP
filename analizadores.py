@@ -28,11 +28,12 @@ def analizar_lexico(codigo: str) -> str:
 
 # ---------- Análisis Sintáctico ----------
 def analizar_sintactico(codigo: str) -> str:
+    lexer.lineno = 1  # <-- esta línea es CLAVE
     parser_sintactico.errorlog = None
     errores_sintacticos.clear()
 
     try:
-        parser_sintactico.parse(codigo)
+        parser_sintactico.parse(codigo, lexer=lexer)  # también asegúrate de usar lexer aquí
     except Exception as e:
         errores_sintacticos.append(f"[Error Sintáctico] {str(e)}")
 
@@ -44,6 +45,7 @@ def analizar_sintactico(codigo: str) -> str:
         resultado.append("No se encontraron errores sintácticos.")
 
     return "\n".join(resultado)
+
 
 
 # ---------- Análisis Semántico ----------

@@ -402,7 +402,7 @@ def p_error(p):
 if __name__ == "__main__":
     parser = yacc.yacc()
 
-    archivo_rb = "algoritmos/algoritmo1.rb"
+    archivo_rb = "algoritmos/algoritmos_saquisili/algoritmo1.rb"
 
     with open(archivo_rb, "r", encoding="utf-8") as f:
         code = f.read()
