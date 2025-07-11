@@ -13,10 +13,6 @@ puts a <= 10         # true
 puts c == "Ruby"     # true
 puts c != "Python"   # true
 
-# Comparación inválida semánticamente (según tus reglas): Integer == String
-# Esto debe generar un error semántico en tu analizador
-# puts a == "10"
-
 # --- Condicional if con elsif y else ---
 nota = 85
 
@@ -62,5 +58,5 @@ puts mostrar_info("Luis", 30)
 def saludar(nombre = "Visitante")
   puts "Hola, #{nombre}"
 end
-
+saludar
 saludar("Camila")
