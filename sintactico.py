@@ -158,6 +158,11 @@ def p_assignment_instance_var(p):
 
 #--------------------
 
+def p_expression_boolean(p):
+    '''expression : TRUE
+                  | FALSE'''
+    p[0] = "Boolean"
+
 # Silvia Saquisili - Inicio
 # Regla para los comparadores en condition
 def p_expression_condition(p): #Se combinaron dos reglas sintacticas que generaban ambiguedad
@@ -250,6 +255,9 @@ def p_function_def_class_method(p):
                     | DEF CONSTANT DOT IDENTIFIER statement_list END_KW'''
     p[0] = ('class_method_def', p[3], p[4], p[5])
 
+def p_statement_return(p):
+    'statement : RETURN expression'
+    p[0] = ('return', p[2])
 
 def p_statement_yield(p):
     'statement : YIELD'
@@ -378,7 +386,7 @@ def p_hash_pair_list(p):
         p[0] = p[1] + [p[3]]
 
 def p_hash_pair(p):
-    '''hash_pair : SYMBOL_COLON ASSIGN expression'''
+    '''hash_pair : IDENTIFIER TERNARY_COLON expression'''
     p[0] = (p[1], p[3])
 # Silvia Saquisili - Fin
 

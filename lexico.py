@@ -92,7 +92,8 @@ tokens = [
     'DOT',
 
     #STEVEN LINO - INICIO
-
+    'TRUE',
+    'FALSE',
     #TERNARIOS
     'IDENTIFIER_Q', 'TERNARY_COLON','AMPERSAND', 'SYMBOL_COLON' # se borro ternary_colon para evitar conflictos
     #Se agrego IDENTIFIER_Q

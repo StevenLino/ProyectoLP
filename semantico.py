@@ -95,14 +95,26 @@ def p_input(p):
 def p_assignment(p):
     'assignment : IDENTIFIER ASSIGN expression'
     var_name = p[1]
-    var_type = p[3]
+    valor = p[3]
+
+    # Extraer tipo real del valor
+    if isinstance(valor, str):
+        var_type = valor
+    elif isinstance(valor, tuple) and valor[0] == 'hash':
+        var_type = "Hash"
+    elif isinstance(valor, tuple) and valor[0] == 'block':
+        var_type = "Block"
+    elif isinstance(valor, tuple) and valor[0] == 'range':
+        var_type = "Range"
+    else:
+        var_type = "Desconocido"
 
     if var_type not in tabla_simbolos["tipos_validos"]:
-        registrar_error(f"[Error Semántico] Tipo desconocido asignado a '{var_name}': {var_type}")
+        registrar_error(f"[Error Semántico] Tipo desconocido asignado a '{var_name}': {valor}")
     else:
         tabla_simbolos["variables"][var_name] = var_type
 
-    p[0] = ('assign', var_name,var_type)
+    p[0] = ('assign', var_name, var_type)
 # Steven Lino - Fin
 
 def p_assignment_composed(p):
@@ -221,6 +233,11 @@ def p_assignment_instance_var(p):
 
 #--------------------
 
+def p_expression_boolean(p):
+    '''expression : TRUE
+                  | FALSE'''
+    p[0] = "Boolean"
+
 # Silvia Saquisili - Inicio
 # Regla para los comparadores en condition
 
@@ -239,7 +256,15 @@ def p_expression_condition(p):
     tipo2 = p[3]
     op = p[2]
 
-    if tipo1 == tipo2 and tipo1 in ["Integer", "Float", "String"]:
+    # Lógicos: && y ||
+    if op in ['&&', '||']:
+        if tipo1 == tipo2 == "Boolean":
+            p[0] = "Boolean"
+        else:
+            registrar_error(f"[Error Semántico] Comparación no válida: {tipo1} {op} {tipo2}")
+            p[0] = "Error"
+    # Comparaciones numéricas o de strings
+    elif tipo1 == tipo2 and tipo1 in ["Integer", "Float", "String"]:
         p[0] = "Boolean"
     else:
         registrar_error(f"[Error Semántico] Comparación no válida: {tipo1} {op} {tipo2}")
@@ -549,7 +574,7 @@ def p_hash_pair_list(p):
         p[0] = p[1] + [p[3]]
 
 def p_hash_pair(p):
-    '''hash_pair : SYMBOL_COLON ASSIGN expression'''
+    '''hash_pair : IDENTIFIER TERNARY_COLON expression'''
     p[0] = (p[1], p[3])
 # Silvia Saquisili - Fin
 
