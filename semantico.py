@@ -593,3 +593,5 @@ if __name__ == "__main__":
             f.write("No se encontraron errores semanticos.\n")
 
     print(f"\n✅ Log guardado en: {ruta_log}")
+
+parser_semantico = yacc.yacc(tabmodule='parsetab')

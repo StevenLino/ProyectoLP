@@ -432,3 +432,5 @@ if __name__ == "__main__":
             f.write("No se encontraron errores sintácticos.\n")
 
     print(f"\n✅ Log guardado en: {ruta_log}")
+
+parser_sintactico = yacc.yacc(tabmodule='parsetab')
