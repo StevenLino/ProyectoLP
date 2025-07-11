@@ -191,6 +191,20 @@ def p_expression_identifier(p):
         registrar_error(f"[Error Semántico] Variable '{var_name}' no definida")
         p[0]="Error"
 
+# Nueva regla para llamados de función - Silvia Saquisili
+def p_expression_function_call(p):
+    '''expression : IDENTIFIER LPAREN expression_list_opt RPAREN'''
+    nombre_funcion = p[1]
+    argumentos = p[3]
+
+    if nombre_funcion in tabla_simbolos["funciones"]:
+        tipo_retorno = tabla_simbolos["funciones"][nombre_funcion]
+        p[0] = tipo_retorno
+    else:
+        registrar_error(f"[Error Semántico] Llamada a función no definida: '{nombre_funcion}'")
+        p[0] = "Error"
+
+
 #Steven Lino - Fin
 
 # REGLAS SINTACTICA PARA VARIABLES DE INSTANCIA INICIO

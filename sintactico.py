@@ -55,7 +55,7 @@ def p_statement(p):
                  | while_statement
                  | unless_statement 
                  | case_statement
-                 | class_def''' # agrego unless_statemente y case_statement - Angel Gómez
+                 | class_def ''' # agrego unless_statemente y case_statement - Angel Gómez
     p[0] = p[1]
 
 def p_print(p):
@@ -137,6 +137,11 @@ def p_expression_definedq(p):
 def p_expression_identifier(p):
     'expression : IDENTIFIER'
     p[0] = ('var', p[1])
+
+# Nueva regla para llamados de función - Silvia Saquisili
+def p_expression_function_call(p):
+    '''expression : IDENTIFIER LPAREN expression_list_opt RPAREN'''
+    p[0] = ('function_call', p[1], p[3])
 
 #Steven Lino - Fin
 

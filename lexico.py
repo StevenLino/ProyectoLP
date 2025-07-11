@@ -159,9 +159,14 @@ t_SEMICOLON       = r';'
 # SILVIA SAQUISILI - FIN
 
 # STEVEN LINO - INICIO
-t_TERNARY_COLON = r':'
+
+# Nuevo orden - Silvia Saquisili
+t_SYMBOL_COLON = r':[a-zA-Z_]\w*'   # primero va esto
+t_TERNARY_COLON = r':'              # después el ':' suelto
+
+#t_TERNARY_COLON = r':'
 t_AMPERSAND = r'&'
-t_SYMBOL_COLON = r':[a-zA-Z_]\w*'
+#t_SYMBOL_COLON = r':[a-zA-Z_]\w*'
 # STEVEN LINO - FIN
 
 # -----------------------------
